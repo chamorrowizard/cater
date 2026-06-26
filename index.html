@@ -527,10 +527,10 @@
         </div>
     </section>
 <!-- ==========================================
-   JAVASCRIPT ARCHITECTURE ENGINE (UPDATED WITH CONTACT INFO)
+   JAVASCRIPT ARCHITECTURE ENGINE (MANUAL QUANTITY INPUT)
    ========================================== -->
 <script>
-    // Structured Database including items extracted from image 1000019255.jpg
+    // 1. Structured Database (Poke's Full Menu Config)
     const database = {
         apps: [
             { name: "Chicken Skin Plain", type: "Appetizer" },
@@ -588,7 +588,7 @@
         burgers: [
             { name: "All American Burger", type: "Grill-N-Burger", desc: "American Cheese, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, Chili sauce." },
             { name: "The Texas Burger", type: "Grill-N-Burger", desc: "American and Cheddar Cheese, Bacon, Caramelized Onions, BBQ Sauce." },
-            { name: "The Big D Burger", type: "Grill-N-Burger", desc: "Two Beef Tactics, Four Slices Of American Cheese, Pickles, Chili Sauce." },
+            { name: "The Big D Burger", type: "Grill-N-Burger", desc: "Two Beef Patties, Four Slices Of American Cheese, Pickles, Chili Sauce." },
             { name: "O.G. With Cheese", type: "Grill-N-Burger", desc: "American Cheese, Ketchup, Mustard, Pickles, Caramelized Onions." },
             { name: "Jalapeño Popper Burger", type: "Grill-N-Burger", desc: "Bacon, jalapeños, Pepper Jack & Cream Cheese Whiz." },
             { name: "LocoMoco Burger", type: "Grill-N-Burger", desc: "American cheese, white rice, gravy, spam, egg & more gravy." },
@@ -598,7 +598,7 @@
             { name: "T-Bird Burger", type: "Grill-N-Burger", desc: "Turkey patty, bacon, choice of cheese, avocado, lettuce, tomatoes, pickles and garlic aioli." },
             { name: "Jive Turkey Burger", type: "Grill-N-Burger", desc: "Turkey patty, pepper jack cheese, jalapenos, grilled onions, lettuce, tomato, garlic aioli." },
             { name: "The Mile High Club", type: "Grill-N-Burger", desc: "Turkey patty, beef patty, spam, three slices of american cheese, garlic aioli, lettuce, tomatoes and pickles." },
-            { name: "Plain Jane Burger", type: "Grill-N-Burger", desc: "Burger Patty, Bun. (Grill-N-Bowls alternative format option: can substitute any burger configuration with Iceberg Lettuce & No Bun)." }
+            { name: "Plain Jane Burger", type: "Grill-N-Burger", desc: "Burger Patty, Bun." }
         ],
         fries: [
             { name: "All American Fries", type: "Chill-N-Fries & Wraps", desc: "American Cheese Whiz, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, Chili sauce." },
@@ -643,7 +643,10 @@
         ]
     };
 
-    // UI rendering engine
+    // Global session state memory tracking card orders
+    const orderSelections = {};
+
+    // UI rendering module
     function loadMenuModule(categoryKey) {
         const gridTarget = document.getElementById("menu-cards-target");
         gridTarget.innerHTML = ""; 
@@ -651,15 +654,92 @@
         database[categoryKey].forEach(item => {
             const card = document.createElement("div");
             card.className = "menu-card";
+            card.style.cursor = "pointer";
+            card.style.position = "relative";
+            
+            const currentQty = orderSelections[item.name] || 0;
             const itemDesc = item.desc ? item.desc : "Available for full scale event booking configurations as part of our signature catering tiers.";
             
             card.innerHTML = `
                 <div class="img-placeholder">IMAGE FOR ${item.name}</div>
                 <h3>${item.name}</h3>
                 <p>${itemDesc}</p>
+                
+                <!-- REFINED QUANTITY CONTROLLER WITH TYPABLE INPUT FIELD -->
+                <div class="quantity-controller" style="display: flex; align-items: center; justify-content: center; margin-top: 15px; gap: 8px;" onclick="event.stopPropagation();">
+                    <button type="button" class="qty-btn minus" style="padding: 5px 14px; background: #e0e0e0; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1.1rem;">-</button>
+                    
+                    <input type="number" class="qty-input" min="0" max="999" value="${currentQty}" 
+                           style="width: 60px; text-align: center; font-weight: bold; font-size: 1rem; padding: 4px; border: 1px solid #ccc; border-radius: 4px; -moz-appearance: textfield;" />
+                    
+                    <button type="button" class="qty-btn plus" style="padding: 5px 14px; background: #ffcc00; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1.1rem;">+</button>
+                </div>
             `;
+
+            const inputField = card.querySelector(".qty-input");
+
+            // Entire Card Click turns item from 0 to 1 field state cleanly
+            card.addEventListener("click", () => {
+                if ((orderSelections[item.name] || 0) === 0) {
+                    updateDirectQuantity(item.name, 1, inputField);
+                }
+            });
+
+            // Minus Button Event Click Handler
+            card.querySelector(".minus").addEventListener("click", () => {
+                let current = orderSelections[item.name] || 0;
+                updateDirectQuantity(item.name, Math.max(0, current - 1), inputField);
+            });
+
+            // Plus Button Event Click Handler
+            card.querySelector(".plus").addEventListener("click", () => {
+                let current = orderSelections[item.name] || 0;
+                updateDirectQuantity(item.name, current + 1, inputField);
+            });
+
+            // Direct Type Input Field Event Listener
+            inputField.addEventListener("input", (e) => {
+                let val = parseInt(e.target.value, 10);
+                if (isNaN(val) || val <= 0) val = 0;
+                updateDirectQuantity(item.name, val, inputField);
+            });
+
+            // Cleans up value field display on completely exiting focus if empty
+            inputField.addEventListener("blur", (e) => {
+                if (e.target.value === "") e.target.value = 0;
+            });
+
             gridTarget.appendChild(card);
         });
+    }
+
+    // Direct Sync Quantity Assignment Engine
+    function updateDirectQuantity(itemName, targetedAmount, inputElement) {
+        if (targetedAmount <= 0) {
+            delete orderSelections[itemName];
+            inputElement.value = 0;
+        } else {
+            orderSelections[itemName] = targetedAmount;
+            inputElement.value = targetedAmount;
+        }
+        
+        syncOrderToTextarea();
+    }
+
+    // Sync state layout straight down to Form Note input area dynamically
+    function syncOrderToTextarea() {
+        const notesArea = document.getElementById("menu-preferences");
+        const summaryLines = [];
+        
+        for (const [item, qty] of Object.entries(orderSelections)) {
+            summaryLines.push(`• ${qty}x ${item}`);
+        }
+        
+        if (summaryLines.length > 0) {
+            notesArea.value = `Requested Menu Selection:\n${summaryLines.join("\n")}`;
+        } else {
+            notesArea.value = ""; 
+        }
     }
 
     function switchMenuTab(element, categoryKey) {
@@ -681,7 +761,6 @@
         submitBtn.innerText = "SENDING REQUEST...";
         submitBtn.disabled = true;
 
-        // Gathers all event logistics AND client contact data point fields
         const formData = {
             clientName: document.getElementById("client-name").value,
             clientPhone: document.getElementById("client-phone").value,
@@ -708,9 +787,11 @@
                 
                 setTimeout(() => {
                     document.getElementById("cateringIntake").reset();
+                    for (const key in orderSelections) delete orderSelections[key];
                     submitBtn.innerText = originalBtnText;
                     submitBtn.style.backgroundColor = "";
                     submitBtn.disabled = false;
+                    loadMenuModule("apps"); 
                 }, 4000);
             } else {
                 throw new Error('Network error');
@@ -723,6 +804,5 @@
         });
     });
 </script>
-
 </body>
 </html>
