@@ -452,17 +452,14 @@
             <p class="menu-subtitle">Select a category path below to preview our massive selection of custom hand-rolled creations and Sandos.</p>
             
             <div class="filter-tabs">
-                <button class="tab-btn active" onclick="switchMenuTab(this, 'apps')">Appetizers</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'asianRolls')">Asian Rolls</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'americanRolls')">American Rolls</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'aztecRolls')">Aztec Rolls</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'italianRolls')">Italian Rolls</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'breakfastRolls')">Breakfast Rolls</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'sweetRolls')">Sweet Rolls</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'sandos')">Sando's</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'breakfastSandos')">Breakfast Sando's</button>
-                <button class="tab-btn" onclick="switchMenuTab(this, 'sweetSandos')">Sweet Sando's</button>
-            </div>
+    <button class="tab-btn active" onclick="switchMenuTab(this, 'apps')">Appetizers</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'rolls')">Egg Rolls</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'sandos')">Sandos</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'burgers')">Grill-N-Burgers</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'fries')">Chill-N-Fries</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'breakfast')">Breakfast</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'sweets')">Sweet Finishes</button>
+</div>
 
             <!-- Dynamic Menu Grid Output target -->
             <div class="menu-grid" id="menu-cards-target">
@@ -515,186 +512,206 @@
         </div>
     </section>
 
-    <!-- ==========================================
-       JAVASCRIPT ARCHITECTURE ENGINE
-       ========================================== -->
-    <script>
-        // Structured Database mapped from the user's customized items list
-        const database = {
-            apps: [
-                { name: "Chicken Skin Plain" },
-                { name: "Chicken Skin Nachos" },
-                { name: "Edamame Plain" },
-                { name: "Spicy Garlic Edamame" },
-                { name: "Cucumber Salad" },
-                { name: "Spicy Cucumber Salad" },
-                { name: "BBQ Corn Ribs" },
-                { name: "Aztec Corn Ribs" },
-                { name: "Aztec Fries" },
-                { name: "Pizza Fries" },
-                { name: "Steak Fries" }
-            ],
-            asianRolls: [
-                { name: "Steamed Veggie Roll" },
-                { name: "Traditional Veggie Egg Roll" },
-                { name: "Chicken Egg Roll" },
-                { name: "Pork Egg Rolls" },
-                { name: "Steak Egg Rolls" },
-                { name: "Loco Moco Rolls" }
-            ],
-            americanRolls: [
-                { name: "Philly Rolls" },
-                { name: "Buffalo Rolls" },
-                { name: "BBQ Pulled Pork Roll" },
-                { name: "Cheese Burger Roll" },
-                { name: "Bacon Mac & Cheese Roll" }
-            ],
-            aztecRolls: [
-                { name: "Birria Roll" },
-                { name: "Beef Taco Roll" },
-                { name: "Steak Taco Roll" },
-                { name: "Chicken Taco Roll" },
-                { name: "Chili Verde Roll" },
-                { name: "Elote Roll" },
-                { name: "Queso Rolls" }
-            ],
-            italianRolls: [
-                { name: "Chicken Parm Roll" },
-                { name: "Pizza Roll" },
-                { name: "Lasagna Rolls" },
-                { name: "Italian Sausage Rolls" },
-                { name: "Braised Pork Rolls" },
-                { name: "Chicken Alfredo Rolls" },
-                { name: "Pasta Rolls" }
-            ],
-            breakfastRolls: [
-                { name: "Spam & Egg Roll" },
-                { name: "Ham Egg & Cheese Roll" },
-                { name: "Bacon Egg & Cheese Roll" },
-                { name: "Sausage Egg & Cheese Roll" },
-                { name: "Bacon Sausage Ham Egg & Cheese Roll" },
-                { name: "Loco Moco Roll" }
-            ],
-            sweetRolls: [
-                { name: "Peach Cobbler Roll" },
-                { name: "Cheesecake Roll" },
-                { name: "Strawberry & Cream Roll" },
-                { name: "Mango Roll" },
-                { name: "Blueberries & Cream" },
-                { name: "Apple Roll" }
-            ],
-            sandos: [
-                { name: "Chicken Katsu" },
-                { name: "Wagu Katsu" },
-                { name: "Pork Katsu" },
-                { name: "Steak Sando" },
-                { name: "Buffalo Sando" },
-                { name: "Pull Pork Sando" },
-                { name: "Veggie Sando" },
-                { name: "Chicken Parm Sando" },
-                { name: "Italian Sausage Sando" },
-                { name: "Braised Pork Sando" },
-                { name: "Philly Sando" }
-            ],
-            breakfastSandos: [
-                { name: "Spam & Egg Sando" },
-                { name: "Ham Egg & Cheese Sando" },
-                { name: "Bacon Egg & Cheese Sando" },
-                { name: "Sausage Egg & Cheese Sando" },
-                { name: "Bacon Sausage Ham Egg & Cheese Sando" },
-                { name: "Loco Moco Sando" }
-            ],
-            sweetSandos: [
-                { name: "Peach Cobbler Sando" },
-                { name: "Cheesecake Sando" },
-                { name: "Strawberry & Cream Sando" },
-                { name: "Mango Sando" },
-                { name: "Blueberries & Cream Sando" },
-                { name: "Apple Sando" }
-            ]
-        };
-
-        // UI rendering function
-        function loadMenuModule(categoryKey) {
-            const gridTarget = document.getElementById("menu-cards-target");
-            gridTarget.innerHTML = ""; // Refresh target container layout
-
-            database[categoryKey].forEach(item => {
-                const card = document.createElement("div");
-                card.className = "menu-card";
-                card.innerHTML = `
-                    <div class="img-placeholder">IMAGE FOR ${item.name}</div>
-                    <h3>${item.name}</h3>
-                    <p>Available for full scale event booking configurations as part of our signature catering tiers.</p>
-                `;
-                gridTarget.appendChild(card);
-            });
-        }
-
-        // Tab routing event click handler
-        function switchMenuTab(element, categoryKey) {
-            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-            element.classList.add("active");
-            loadMenuModule(categoryKey);
-        }
-
-        // Setup baseline initialization parameters
-        document.addEventListener("DOMContentLoaded", () => {
-            loadMenuModule("apps");
-        });
-
-        // Form handler logic stub
-        // Handle seamless backend intake submission
-document.getElementById("cateringIntake").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevents the page from reloading/refreshing
-
-    // 1. Target the submit button to give visual feedback to the client
-    const submitBtn = this.querySelector("button[type='submit']");
-    const originalBtnText = submitBtn.innerText;
-    submitBtn.innerText = "SENDING REQUEST...";
-    submitBtn.disabled = true;
-
-    // 2. Gather all the data fields from the form
-    const formData = {
-        setup: document.getElementById("event-profile").value,
-        guests: document.getElementById("guest-volume").value,
-        date: document.getElementById("target-date").value,
-        location: document.getElementById("location-space").value,
-        notes: document.getElementById("menu-preferences").value
+<!-- ==========================================
+   JAVASCRIPT ARCHITECTURE ENGINE (UPDATED WITH POKE'S MENU)
+   ========================================== -->
+<script>
+    // Structured Database including items extracted from image 1000019255.jpg
+    const database = {
+        apps: [
+            { name: "Chicken Skin Plain", type: "Appetizer" },
+            { name: "Chicken Skin Nachos", type: "Appetizer" },
+            { name: "Edamame Plain", type: "Appetizer" },
+            { name: "Spicy Garlic Edamame", type: "Appetizer" },
+            { name: "Cucumber Salad", type: "Appetizer" },
+            { name: "Spicy Cucumber Salad", type: "Appetizer" },
+            { name: "BBQ Corn Ribs", type: "Appetizer" },
+            { name: "Aztec Corn Ribs", type: "Appetizer" },
+            { name: "Aztec Fries", type: "Appetizer" },
+            { name: "Pizza Fries", type: "Appetizer" },
+            { name: "Steak Fries", type: "Appetizer" }
+        ],
+        rolls: [
+            // Asian
+            { name: "Steamed Veggie Roll", type: "Asian Fusion Roll" },
+            { name: "Traditional Veggie Egg Roll", type: "Asian Fusion Roll" },
+            { name: "Chicken Egg Roll", type: "Asian Fusion Roll" },
+            { name: "Pork Egg Rolls", type: "Asian Fusion Roll" },
+            { name: "Steak Egg Rolls", type: "Asian Fusion Roll" },
+            { name: "Loco Moco Rolls", type: "Asian Fusion Roll" },
+            // American
+            { name: "Philly Rolls", type: "American Classic Roll" },
+            { name: "Buffalo Rolls", type: "American Classic Roll" },
+            { name: "BBQ Pulled Pork Roll", type: "American Classic Roll" },
+            { name: "Cheese Burger Roll", type: "American Classic Roll" },
+            { name: "Bacon Mac & Cheese Roll", type: "American Classic Roll" },
+            // Aztec
+            { name: "Birria Roll", type: "Aztec Signature Roll" },
+            { name: "Beef Taco Roll", type: "Aztec Signature Roll" },
+            { name: "Steak Taco Roll", type: "Aztec Signature Roll" },
+            { name: "Chicken Taco Roll", type: "Aztec Signature Roll" },
+            { name: "Chili Verde Roll", type: "Aztec Signature Roll" },
+            { name: "Elote Roll", type: "Aztec Signature Roll" },
+            { name: "Queso Rolls", type: "Aztec Signature Roll" },
+            // Italian
+            { name: "Chicken Parm Roll", type: "Italian Gourmet Roll" },
+            { name: "Pizza Roll", type: "Italian Gourmet Roll" },
+            { name: "Lasagna Rolls", type: "Italian Gourmet Roll" },
+            { name: "Italian Sausage Rolls", type: "Italian Gourmet Roll" },
+            { name: "Braised Pork Rolls", type: "Italian Gourmet Roll" },
+            { name: "Chicken Alfredo Rolls", type: "Italian Gourmet Roll" },
+            { name: "Pasta Rolls", type: "Italian Gourmet Roll" }
+        ],
+        sandos: [
+            { name: "Chicken Katsu", type: "Signature Sando" },
+            { name: "Wagu Katsu", type: "Signature Sando" },
+            { name: "Pork Katsu", type: "Signature Sando" },
+            { name: "Steak Sando", type: "Signature Sando" },
+            { name: "Buffalo Sando", type: "Signature Sando" },
+            { name: "Pull Pork Sando", type: "Signature Sando" },
+            { name: "Veggie Sando", type: "Signature Sando" },
+            { name: "Chicken Parm Sando", type: "Signature Sando" },
+            { name: "Italian Sausage Sando", type: "Signature Sando" },
+            { name: "Braised Pork Sando", type: "Signature Sando" },
+            { name: "Philly Sando", type: "Signature Sando" }
+        ],
+        burgers: [
+            { name: "All American Burger", type: "Grill-N-Burger", desc: "American Cheese, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, Chili sauce." },
+            { name: "The Texas Burger", type: "Grill-N-Burger", desc: "American and Cheddar Cheese, Bacon, Caramelized Onions, BBQ Sauce." },
+            { name: "The Big D Burger", type: "Grill-N-Burger", desc: "Two Beef Patties, Four Slices Of American Cheese, Pickles, Chili Sauce." },
+            { name: "O.G. With Cheese", type: "Grill-N-Burger", desc: "American Cheese, Ketchup, Mustard, Pickles, Caramelized Onions." },
+            { name: "Jalapeño Popper Burger", type: "Grill-N-Burger", desc: "Bacon, jalapeños, Pepper Jack & Cream Cheese Whiz." },
+            { name: "LocoMoco Burger", type: "Grill-N-Burger", desc: "American cheese, white rice, gravy, spam, egg & more gravy." },
+            { name: "Goldie Mac Burger", type: "Grill-N-Burger", desc: "Pepper jack, cheesy mac, Bacon, elote cheese dusted bun." },
+            { name: "Chili Mac Burger", type: "Grill-N-Burger", desc: "Pepper jack, cheesy mac, chili, elote dusted bun." },
+            { name: "Chili Chili Burger", type: "Grill-N-Burger", desc: "American cheese, chili, cheese sauce." },
+            { name: "T-Bird Burger", type: "Grill-N-Burger", desc: "Turkey patty, bacon, choice of cheese, avocado, lettuce, tomatoes, pickles and garlic aioli." },
+            { name: "Jive Turkey Burger", type: "Grill-N-Burger", desc: "Turkey patty, pepper jack cheese, jalapenos, grilled onions, lettuce, tomato, garlic aioli." },
+            { name: "The Mile High Club", type: "Grill-N-Burger", desc: "Turkey patty, beef patty, spam, three slices of american cheese, garlic aioli, lettuce, tomatoes and pickles." },
+            { name: "Plain Jane Burger", type: "Grill-N-Burger", desc: "Burger Patty, Bun. (Grill-N-Bowls alternative format option: can substitute any burger configuration with Iceberg Lettuce & No Bun)." }
+        ],
+        fries: [
+            { name: "All American Fries", type: "Chill-N-Fries & Wraps", desc: "American Cheese Whiz, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, Chili sauce." },
+            { name: "The Texas Fries", type: "Chill-N-Fries & Wraps", desc: "American Cheese Whiz, Bacon, Caramelized Onions, BBQ Sauce." },
+            { name: "The Big D Fries", type: "Chill-N-Fries & Wraps", desc: "Beef Patty, American Cheese Whiz, Chili Sauce, Pickles." },
+            { name: "O.G. With Cheese Fries", type: "Chill-N-Fries & Wraps", desc: "American Cheese Whiz, Ketchup, Mustard, Pickles, Caramelized Onions." },
+            { name: "Jalapeño Popper Fries", type: "Chill-N-Fries & Wraps", desc: "Bacon, jalapeños, Pepper Jack & Cream Cheese Whiz." },
+            { name: "LocoMoco Fries", type: "Chill-N-Fries & Wraps", desc: "Cheese sauce, beef patty, gravy, spam, egg & more gravy." },
+            { name: "Chili Chili Fries", type: "Chill-N-Fries & Wraps", desc: "Cheese sauce, chili & more cheese sauce." },
+            { name: "Plain Jane Fries", type: "Chill-N-Fries & Wraps", desc: "Salt, Pepper, Garlic, Onion." },
+            { name: "Chill-N-Fries Sampler", type: "Chill-N-Fries & Wraps", desc: "Custom event curation profile: Choose up to 3 standard Chill-N-Fries configurations." },
+            { name: "16 oz Cup of Mac", type: "Side Dish", desc: "Premium house-made side profile mac serving." },
+            { name: "16 oz Cup of Chili", type: "Side Dish", desc: "Premium house-made signature hearty side chili serving." }
+        ],
+        breakfast: [
+            { name: "Spam & Egg Roll", type: "Breakfast Roll" },
+            { name: "Ham Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Bacon Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Sausage Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Bacon Sausage Ham Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Loco Moco Roll", type: "Breakfast Roll" },
+            { name: "Spam & Egg Sando", type: "Breakfast Sando" },
+            { name: "Ham Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Bacon Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Sausage Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Bacon Sausage Ham Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Loco Moco Sando", type: "Breakfast Sando" }
+        ],
+        sweets: [
+            { name: "Peach Cobbler Roll", type: "Sweet Signature Roll" },
+            { name: "Cheesecake Roll", type: "Sweet Signature Roll" },
+            { name: "Strawberry & Cream Roll", type: "Sweet Signature Roll" },
+            { name: "Mango Roll", type: "Sweet Signature Roll" },
+            { name: "Blueberries & Cream", type: "Sweet Signature Roll" },
+            { name: "Apple Roll", type: "Sweet Signature Roll" },
+            { name: "Peach Cobbler Sando", type: "Sweet Sando Finisher" },
+            { name: "Cheesecake Sando", type: "Sweet Sando Finisher" },
+            { name: "Strawberry & Cream Sando", type: "Sweet Sando Finisher" },
+            { name: "Mango Sando", type: "Sweet Sando Finisher" },
+            { name: "Blueberries & Cream Sando", type: "Sweet Sando Finisher" },
+            { name: "Apple Sando", type: "Sweet Sando Finisher" }
+        ]
     };
 
-    // 3. Silently shoot the data to your Formspree endpoint in the background
-    fetch('https://formspree.io/f/mpqgpgyr', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        if (response.ok) {
-            // Change the button text seamlessly so they know it worked
-            submitBtn.innerText = "✓ REQUEST SUBMITTED!";
-            submitBtn.style.backgroundColor = "#28a745"; // Changes button color to green on success
+    // UI rendering engine
+    function loadMenuModule(categoryKey) {
+        const gridTarget = document.getElementById("menu-cards-target");
+        gridTarget.innerHTML = ""; // Refresh target container layout
+
+        database[categoryKey].forEach(item => {
+            const card = document.createElement("div");
+            card.className = "menu-card";
             
-            // Cleanly reset the form fields after 4 seconds
-            setTimeout(() => {
-                document.getElementById("cateringIntake").reset();
-                submitBtn.innerText = originalBtnText;
-                submitBtn.style.backgroundColor = ""; // Resets back to your theme gold
-                submitBtn.disabled = false;
-            }, 4000);
-        } else {
-            throw new Error('Network error');
-        }
-    })
-    .catch(error => {
-        console.error("Error sending lead:", error);
-        submitBtn.innerText = "ERROR. TRY AGAIN.";
-        submitBtn.disabled = false;
+            // Auto fallback text for modules that don't have descriptions explicit in the database
+            const itemDesc = item.desc ? item.desc : "Available for full scale event booking configurations as part of our signature catering tiers.";
+            
+            card.innerHTML = `
+                <div class="img-placeholder">IMAGE FOR ${item.name}</div>
+                <h3>${item.name}</h3>
+                <p>${itemDesc}</p>
+            `;
+            gridTarget.appendChild(card);
+        });
+    }
+
+    // Tab routing event click handler
+    function switchMenuTab(element, categoryKey) {
+        document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+        element.classList.add("active");
+        loadMenuModule(categoryKey);
+    }
+
+    // Setup baseline initialization parameters
+    document.addEventListener("DOMContentLoaded", () => {
+        loadMenuModule("apps");
     });
-});
-    </script>
+
+    // Handle seamless backend intake submission (Formspree Live Link)
+    document.getElementById("cateringIntake").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const submitBtn = this.querySelector("button[type='submit']");
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = "SENDING REQUEST...";
+        submitBtn.disabled = true;
+
+        const formData = {
+            setup: document.getElementById("event-profile").value,
+            guests: document.getElementById("guest-volume").value,
+            date: document.getElementById("target-date").value,
+            location: document.getElementById("location-space").value,
+            notes: document.getElementById("menu-preferences").value
+        };
+
+        fetch('https://formspree.io/f/mpqgpgyr', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                submitBtn.innerText = "✓ REQUEST SUBMITTED!";
+                submitBtn.style.backgroundColor = "#28a745";
+                
+                setTimeout(() => {
+                    document.getElementById("cateringIntake").reset();
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.style.backgroundColor = "";
+                    submitBtn.disabled = false;
+                }, 4000);
+            } else {
+                throw new Error('Network error');
+            }
+        })
+        .catch(error => {
+            console.error("Error sending lead:", error);
+            submitBtn.innerText = "ERROR. TRY AGAIN.";
+            submitBtn.disabled = false;
+        });
+    });
+</script>
 </body>
 </html>
