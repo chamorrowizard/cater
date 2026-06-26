@@ -501,7 +501,22 @@
                     <label for="location-space">Venue City / Neighborhood</label>
                     <input type="text" id="location-space" placeholder="e.g. Downtown, Convention Hall, Private Space">
                 </div>
+                <!-- REFINED MOBILE-RESPONSIVE CONTACT SECTION -->
+<div class="contact-info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 15px;">
+    <div class="form-group">
+        <label for="client-name">Full Name *</label>
+        <input type="text" id="client-name" placeholder="First Last" style="width: 100%; box-sizing: border-box;" required />
+    </div>
+    <div class="form-group">
+        <label for="client-phone">Phone Number *</label>
+        <input type="tel" id="client-phone" placeholder="Phone Number" style="width: 100%; box-sizing: border-box;" required />
+    </div>
+</div>
 
+<div class="form-group" style="margin-bottom: 15px;">
+    <label for="client-email">Email Address *</label>
+    <input type="email" id="client-email" placeholder="your-email@example.com" style="width: 100%; box-sizing: border-box;" required />
+</div>
                 <div class="form-group full-width">
                     <label for="menu-preferences">Special Requests or Priority Items</label>
                     <textarea id="menu-preferences" rows="4" placeholder="Let us know which specific Egg Rolls or Sandos your group is tracking closest..."></textarea>
@@ -511,9 +526,8 @@
             </form>
         </div>
     </section>
-
 <!-- ==========================================
-   JAVASCRIPT ARCHITECTURE ENGINE (UPDATED WITH POKE'S MENU)
+   JAVASCRIPT ARCHITECTURE ENGINE (UPDATED WITH CONTACT INFO)
    ========================================== -->
 <script>
     // Structured Database including items extracted from image 1000019255.jpg
@@ -532,20 +546,17 @@
             { name: "Steak Fries", type: "Appetizer" }
         ],
         rolls: [
-            // Asian
             { name: "Steamed Veggie Roll", type: "Asian Fusion Roll" },
             { name: "Traditional Veggie Egg Roll", type: "Asian Fusion Roll" },
             { name: "Chicken Egg Roll", type: "Asian Fusion Roll" },
             { name: "Pork Egg Rolls", type: "Asian Fusion Roll" },
             { name: "Steak Egg Rolls", type: "Asian Fusion Roll" },
             { name: "Loco Moco Rolls", type: "Asian Fusion Roll" },
-            // American
             { name: "Philly Rolls", type: "American Classic Roll" },
             { name: "Buffalo Rolls", type: "American Classic Roll" },
             { name: "BBQ Pulled Pork Roll", type: "American Classic Roll" },
             { name: "Cheese Burger Roll", type: "American Classic Roll" },
             { name: "Bacon Mac & Cheese Roll", type: "American Classic Roll" },
-            // Aztec
             { name: "Birria Roll", type: "Aztec Signature Roll" },
             { name: "Beef Taco Roll", type: "Aztec Signature Roll" },
             { name: "Steak Taco Roll", type: "Aztec Signature Roll" },
@@ -553,7 +564,6 @@
             { name: "Chili Verde Roll", type: "Aztec Signature Roll" },
             { name: "Elote Roll", type: "Aztec Signature Roll" },
             { name: "Queso Rolls", type: "Aztec Signature Roll" },
-            // Italian
             { name: "Chicken Parm Roll", type: "Italian Gourmet Roll" },
             { name: "Pizza Roll", type: "Italian Gourmet Roll" },
             { name: "Lasagna Rolls", type: "Italian Gourmet Roll" },
@@ -578,7 +588,7 @@
         burgers: [
             { name: "All American Burger", type: "Grill-N-Burger", desc: "American Cheese, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, Chili sauce." },
             { name: "The Texas Burger", type: "Grill-N-Burger", desc: "American and Cheddar Cheese, Bacon, Caramelized Onions, BBQ Sauce." },
-            { name: "The Big D Burger", type: "Grill-N-Burger", desc: "Two Beef Patties, Four Slices Of American Cheese, Pickles, Chili Sauce." },
+            { name: "The Big D Burger", type: "Grill-N-Burger", desc: "Two Beef Tactics, Four Slices Of American Cheese, Pickles, Chili Sauce." },
             { name: "O.G. With Cheese", type: "Grill-N-Burger", desc: "American Cheese, Ketchup, Mustard, Pickles, Caramelized Onions." },
             { name: "Jalapeño Popper Burger", type: "Grill-N-Burger", desc: "Bacon, jalapeños, Pepper Jack & Cream Cheese Whiz." },
             { name: "LocoMoco Burger", type: "Grill-N-Burger", desc: "American cheese, white rice, gravy, spam, egg & more gravy." },
@@ -636,13 +646,11 @@
     // UI rendering engine
     function loadMenuModule(categoryKey) {
         const gridTarget = document.getElementById("menu-cards-target");
-        gridTarget.innerHTML = ""; // Refresh target container layout
+        gridTarget.innerHTML = ""; 
 
         database[categoryKey].forEach(item => {
             const card = document.createElement("div");
             card.className = "menu-card";
-            
-            // Auto fallback text for modules that don't have descriptions explicit in the database
             const itemDesc = item.desc ? item.desc : "Available for full scale event booking configurations as part of our signature catering tiers.";
             
             card.innerHTML = `
@@ -654,19 +662,17 @@
         });
     }
 
-    // Tab routing event click handler
     function switchMenuTab(element, categoryKey) {
         document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
         element.classList.add("active");
         loadMenuModule(categoryKey);
     }
 
-    // Setup baseline initialization parameters
     document.addEventListener("DOMContentLoaded", () => {
         loadMenuModule("apps");
     });
 
-    // Handle seamless backend intake submission (Formspree Live Link)
+    // Handle seamless backend intake submission (With Contact Validation Setup)
     document.getElementById("cateringIntake").addEventListener("submit", function(e) {
         e.preventDefault();
 
@@ -675,7 +681,11 @@
         submitBtn.innerText = "SENDING REQUEST...";
         submitBtn.disabled = true;
 
+        // Gathers all event logistics AND client contact data point fields
         const formData = {
+            clientName: document.getElementById("client-name").value,
+            clientPhone: document.getElementById("client-phone").value,
+            clientEmail: document.getElementById("client-email").value,
             setup: document.getElementById("event-profile").value,
             guests: document.getElementById("guest-volume").value,
             date: document.getElementById("target-date").value,
@@ -713,5 +723,6 @@
         });
     });
 </script>
+
 </body>
 </html>
