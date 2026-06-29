@@ -924,9 +924,33 @@
 </script>
 
 <!-- Fixed footer CTA linking to the Chef Portfolio gallery -->
-<footer style="position:fixed;left:0;right:0;bottom:16px;display:flex;justify-content:center;pointer-events:none;z-index:220;">
-    <a href="collage.html" target="_blank" rel="noopener noreferrer" class="btn btn-accent" style="pointer-events:auto; box-shadow:0 8px 20px rgba(0,0,0,0.25);">Chef Portfolio</a>
+<style>
+    /* Footer CTA styling and overlap-hide helper */
+    .footer-portfolio{position:fixed;left:0;right:0;bottom:16px;display:flex;justify-content:center;pointer-events:none;z-index:220;transition:opacity .28s ease,transform .28s ease}
+    .footer-portfolio a{pointer-events:auto;box-shadow:0 8px 20px rgba(0,0,0,0.25)}
+    .footer-portfolio.hidden-overlap{opacity:0;transform:translateY(8px);pointer-events:none}
+</style>
+<footer id="chef-portfolio-footer" class="footer-portfolio">
+    <a href="collage.html" target="_blank" rel="noopener noreferrer" class="btn btn-accent">Chef Portfolio</a>
 </footer>
+
+<script>
+    // Hide the Chef Portfolio footer button while the Catering Menu (#menus) section is visible
+    (function(){
+        const footer = document.getElementById('chef-portfolio-footer');
+        const menus = document.getElementById('menus');
+        if (!footer || !menus) return;
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) footer.classList.add('hidden-overlap');
+                else footer.classList.remove('hidden-overlap');
+            });
+        }, { root: null, threshold: 0.12 });
+
+        observer.observe(menus);
+    })();
+</script>
 
 </body>
 </html>
