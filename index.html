@@ -660,8 +660,126 @@
             const currentQty = orderSelections[item.name] || 0;
             const itemDesc = item.desc ? item.desc : "Available for full scale event booking configurations as part of our signature catering tiers.";
             
+            // Local mapping array to pair available image assets to their precise item names
+            const imageMap = {
+                /* Apps */
+                "Chicken Skin Plain": "",
+                "Chicken Skin Nachos": "",
+                "Edamame Plain": "",
+                "Spicy Garlic Edamame": "",
+                "Cucumber Salad": "",
+                "Spicy Cucumber Salad": "",
+                "BBQ Corn Ribs": "",
+                "Aztec Corn Ribs": "",
+                "Aztec Fries": "",
+                "Pizza Fries": "",
+                "Steak Fries": "",
+
+                /* Rolls */
+                "Steamed Veggie Roll": "",
+                "Traditional Veggie Egg Roll": "",
+                "Chicken Egg Roll": "",
+                "Pork Egg Rolls": "",
+                "Steak Egg Rolls": "",
+                "Loco Moco Rolls": "",
+                "Philly Rolls": "",
+                "Buffalo Rolls": "",
+                "BBQ Pulled Pork Roll": "",
+                "Cheese Burger Roll": "",
+                "Bacon Mac & Cheese Roll": "",
+                "Birria Roll": "",
+                "Beef Taco Roll": "",
+                "Steak Taco Roll": "",
+                "Chicken Taco Roll": "",
+                "Chili Verde Roll": "",
+                "Elote Roll": "",
+                "Queso Rolls": "",
+                "Chicken Parm Roll": "",
+                "Pizza Roll": "",
+                "Lasagna Rolls": "",
+                "Italian Sausage Rolls": "",
+                "Braised Pork Rolls": "",
+                "Chicken Alfredo Rolls": "",
+                "Pasta Rolls": "",
+
+                /* Sandos */
+                "Chicken Katsu": "Chicken-Katsu.jpg",
+                "Wagu Katsu": "",
+                "Pork Katsu": "",
+                "Steak Sando": "",
+                "Buffalo Sando": "",
+                "Pull Pork Sando": "",
+                "Veggie Sando": "",
+                "Chicken Parm Sando": "",
+                "Italian Sausage Sando": "",
+                "Braised Pork Sando": "",
+                "Philly Sando": "",
+
+                /* Burgers */
+                "All American Burger": "",
+                "The Texas Burger": "",
+                "The Big D Burger": "",
+                "O.G. With Cheese": "",
+                "Jalapeño Popper Burger": "",
+                "LocoMoco Burger": "",
+                "Goldie Mac Burger": "",
+                "Chili Mac Burger": "",
+                "Chili Chili Burger": "",
+                "T-Bird Burger": "",
+                "Jive Turkey Burger": "",
+                "The Mile High Club": "",
+                "Plain Jane Burger": "",
+
+                /* Fries */
+                "All American Fries": "",
+                "The Texas Fries": "",
+                "The Big D Fries": "",
+                "O.G. With Cheese Fries": "",
+                "Jalapeño Popper Fries": "",
+                "LocoMoco Fries": "",
+                "Chili Chili Fries": "",
+                "Plain Jane Fries": "",
+                "Chill-N-Fries Sampler": "",
+                "16 oz Cup of Mac": "",
+                "16 oz Cup of Chili": "",
+
+                /* Breakfast */
+                "Spam & Egg Roll": "",
+                "Ham Egg & Cheese Roll": "",
+                "Bacon Egg & Cheese Roll": "",
+                "Sausage Egg & Cheese Roll": "",
+                "Bacon Sausage Ham Egg & Cheese Roll": "",
+                "Loco Moco Roll": "",
+                "Spam & Egg Sando": "",
+                "Ham Egg & Cheese Sando": "",
+                "Bacon Egg & Cheese Sando": "",
+                "Sausage Egg & Cheese Sando": "",
+                "Bacon Sausage Ham Egg & Cheese Sando": "",
+                "Loco Moco Sando": "",
+
+                /* Sweets */
+                "Peach Cobbler Roll": "",
+                "Cheesecake Roll": "",
+                "Strawberry & Cream Roll": "",
+                "Mango Roll": "",
+                "Blueberries & Cream": "",
+                "Apple Roll": "",
+                "Peach Cobbler Sando": "",
+                "Cheesecake Sando": "",
+                "Strawberry & Cream Sando": "",
+                "Mango Sando": "",
+                "Blueberries & Cream Sando": "",
+                "Apple Sando": ""
+            };
+
+            // Fallback gracefully to hide the image block entirely if no image is mapped yet
+            const imageSrc = imageMap[item.name];
+            const mediaHTML = (imageSrc && imageSrc.trim() !== "")
+                ? `<img src="images/${imageSrc}" alt="${item.name}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px;">`
+                : `<div class="img-placeholder" style="display:none;margin-bottom: 15px;"></div>`;
+            
             card.innerHTML = `
-                <div class="img-placeholder">IMAGE FOR ${item.name}</div>
+                ${mediaHTML}
                 <h3>${item.name}</h3>
                 <p>${itemDesc}</p>
                 
