@@ -3,203 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Items Showcase Collage</title>
+    <title>Chef Portfolio Gallery</title>
     <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #121212;
+            --accent: #f2a900; /* Warm golden color matching high-end culinary design */
+            --gap: 20px;
+            --radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Smooth Scrolling & Base Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
             color: #ffffff;
             margin: 0;
             padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Cinematic Header Setup */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 20px 0;
         }
 
         h1 {
-            margin-bottom: 30px;
-            font-size: 2.5rem;
+            font-size: 2.75rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #ffcc00;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* The 3x3 Responsive Grid Layout */
-        .collage-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        /* Individual Grid Cards */
-        .collage-item {
-            position: relative;
-            background-color: #1e1e1e;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
-            height: 350px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .collage-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(255, 204, 0, 0.2);
-        }
-
-        /* Verbatim Image Rendering */
-        .collage-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Sleek Text Overlay Over Every Asset */
-        .label-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
-            padding: 20px 15px;
-            text-align: center;
-        }
-
-        .item-name {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #ffcc00;
-            margin: 0 0 5px 0;
-        }
-
-        .file-name {
-            font-size: 0.85rem;
-            color: #aaaaaa;
-            font-family: 'Courier New', Courier, monospace;
+        header p {
+            font-size: 1rem;
+            color: #737373;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             margin: 0;
         }
 
-        /* Special Pop Badge for the Centerpiece Platter */
-        .badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: #d9534f;
-            color: white;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 20px auto 0 auto;
+            border-radius: 2px;
         }
 
-        /* Responsive collapse for tablet/mobile viewports */
-        @media (max-width: 900px) {
-            .collage-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* High-End Responsive Grid System */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--gap);
+            max-width: 1600px;
+            margin: 0 auto;
         }
+
+        /* Cards & Cinematic Micro-interactions */
+        .photo {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            transition: var(--transition);
+            filter: brightness(0.9) contrast(1.05);
+        }
+
+        /* Hover Overlay & Zoom Effects */
+        .photo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+            opacity: 0;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .photo:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(242, 169, 0, 0.2);
+        }
+
+        .photo:hover img {
+            transform: scale(1.06);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        .photo:hover::before {
+            opacity: 1;
+        }
+
+        /* Responsive Mobile Breaks */
+        @media (max-width: 900px) {
+            body { padding: 30px 15px; }
+            h1 { font-size: 2.25rem; }
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+
         @media (max-width: 600px) {
-            .collage-container {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 1.85rem; }
+            .gallery { grid-template-columns: 1fr; gap: 15px; }
+            .photo img { aspect-ratio: 16/10; } /* Slightly wider field depth for single-column mobile reading */
+        }
+
+        /* MOBILE LIGHTBOX MODAL CAPABILITY */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(5, 5, 5, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
 
-    <h1>Menu Items Layout Display</h1>
+    <header>
+        <h1>Chef Portfolio</h1>
+        <p>Curated Culinary Creations & Plating Showcase</p>
+    </header>
 
-    <div class="collage-container">
-
-        <!-- Top Left -->
-        <div class="collage-item">
-            <img src="images/photo_72_2026-06-28_21-27-46.jpg" alt="All American Burger">
-            <div class="label-overlay">
-                <p class="item-name">All American Burger</p>
-                <p class="file-name">photo_72_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
-        <!-- Top Center -->
-        <div class="collage-item">
-            <img src="images/photo_11_2026-06-28_21-27-45.jpg" alt="LocoMoco Burger">
-            <div class="label-overlay">
-                <p class="item-name">LocoMoco Burger</p>
-                <p class="file-name">photo_11_2026-06-28_21-27-45.jpg</p>
-            </div>
-        </div>
-
-        <!-- Top Right -->
-        <div class="collage-item">
-            <img src="images/photo_65_2026-06-28_21-27-46.jpg" alt="Spam & Egg Sando">
-            <div class="label-overlay">
-                <p class="item-name">Spam & Egg Sando</p>
-                <p class="file-name">photo_65_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
-        <!-- Middle Left -->
-        <div class="collage-item">
-            <img src="images/photo_59_2026-06-28_21-27-46.jpg" alt="Chicken Parm Roll">
-            <div class="label-overlay">
-                <p class="item-name">Chicken Parm Roll</p>
-                <p class="file-name">photo_59_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
-        <!-- Center Piece (The Showstopper Platter) -->
-        <div class="collage-item" style="border: 2px solid #ffcc00;">
-            <span class="badge">Catering Star</span>
-            <img src="images/photo_20_2026-06-28_21-27-46.jpg" alt="Steak & Fingerling Potatoes">
-            <div class="label-overlay">
-                <p class="item-name">Steak & Fingerling Potatoes</p>
-                <p class="file-name">photo_20_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
-        <!-- Middle Right -->
-        <div class="collage-item">
-            <img src="images/photo_68_2026-06-28_21-27-46.jpg" alt="Cucumber Salad Cups">
-            <div class="label-overlay">
-                <p class="item-name">Cucumber Salad Cups</p>
-                <p class="file-name">photo_68_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
-        <!-- Bottom Left -->
-        <div class="collage-item">
-            <img src="images/photo_27_2026-06-28_21-27-46.jpg" alt="Traditional Caesar Salad">
-            <div class="label-overlay">
-                <p class="item-name">Traditional Caesar Salad</p>
-                <p class="file-name">photo_27_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
-        <!-- Bottom Center -->
-        <div class="collage-item">
-            <img src="images/photo_13_2026-06-28_21-27-45.jpg" alt="Premium House Salad (strawberries)">
-            <div class="label-overlay">
-                <p class="item-name">Premium House Salad</p>
-                <p class="file-name">photo_13_2026-06-28_21-27-45.jpg</p>
-            </div>
-        </div>
-
-        <!-- Bottom Right -->
-        <div class="collage-item">
-            <img src="images/photo_49_2026-06-28_21-27-46.jpg" alt="Plain Jane Burger">
-            <div class="label-overlay">
-                <p class="item-name">Plain Jane Burger</p>
-                <p class="file-name">photo_49_2026-06-28_21-27-46.jpg</p>
-            </div>
-        </div>
-
+    <div class="gallery">
+        <div class="photo"><img src="images/photo_72_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_11_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_65_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_59_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_28_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_68_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_83_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_49_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_37_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_23_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_39_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_56_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_50_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_13_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_8_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_31_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_9_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_15_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_69_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_76_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_54_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_10_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_44_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_63_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_66_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_4_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_58_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_30_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_25_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_55_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_78_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_14_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_53_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_45_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_19_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_82_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_32_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_12_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_17_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_38_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_52_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_16_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_1_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_48_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_61_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_21_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_40_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_20_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_29_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_51_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_64_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_60_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_43_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_47_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_71_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_22_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_62_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_46_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_18_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_5_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_77_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_81_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_74_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_33_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_2_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_75_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_70_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_7_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_42_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_24_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_26_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_79_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_34_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_41_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_57_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_84_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/Chicken-Katsu.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_35_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_73_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_80_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_6_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_67_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_36_2026-06-28_21-27-46.jpg" alt="Culinary Presentation"></div>
+        <div class="photo"><img src="images/photo_3_2026-06-28_21-27-45.jpg" alt="Culinary Presentation"></div>
     </div>
 
+    <!-- LIGHTBOX ENGINE TARGET -->
+    <div class="lightbox" id="portfolioLightbox">
+        <button class="lightbox-close" id="closeLightbox" aria-label="Close presentation overlay">&times;</button>
+        <img src="" alt="Expanded portfolio preview" id="lightboxImg">
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('portfolioLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeBtn = document.getElementById('closeLightbox');
+        const photos = document.querySelectorAll('.photo');
+
+        // Fire interactive view on selection click
+        photos.forEach(photo => {
+            photo.addEventListener('click', () => {
+                const img = photo.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                }
+            });
+        });
+
+        // Close functions
+        closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
