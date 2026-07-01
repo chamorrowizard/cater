@@ -70,6 +70,46 @@
             text-transform: uppercase;
         }
 
+                /* Polished placeholder + image fit */
+                .img-placeholder {
+                    overflow: hidden;
+                    position: relative;
+                    border-radius: 8px;
+                    min-height: 160px;
+                    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+                    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+                    transition: transform 0.25s ease, box-shadow 0.25s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                /* Slight lift on hover for a tactile feel */
+                .img-placeholder:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+                }
+
+                /* Force images to cover the area, remain centered, and be responsive */
+                .img-placeholder img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    border-radius: inherit;
+                    transition: transform 0.4s ease;
+                }
+
+                /* Gentle zoom on hover */
+                .img-placeholder:hover img {
+                    transform: scale(1.05);
+                }
+
+                /* Helpful aspect control for consistent card heights */
+                .menu-card .img-placeholder { aspect-ratio: 4 / 3; }
+                .hero-media .img-placeholder { aspect-ratio: 16 / 9; min-height: 220px; }
+
         /* Buttons */
         .btn {
             display: inline-block;
@@ -439,7 +479,7 @@
             </div>
             <div class="hero-media">
                 <div class="img-placeholder">
-                    Featured Platter Presentation Image Placeholder
+                    <img src="./images/Chicken-Katsu.jpg" alt="">
                 </div>
             </div>
         </div>
