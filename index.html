@@ -558,8 +558,13 @@
     <input type="email" id="client-email" placeholder="your-email@example.com" style="width: 100%; box-sizing: border-box;" required />
 </div>
                 <div class="form-group full-width">
-                    <label for="menu-preferences">Special Requests or Priority Items</label>
-                    <textarea id="menu-preferences" rows="4" placeholder="Let us know which specific Egg Rolls or Sandos your group is tracking closest..."></textarea>
+                    <label for="order-summary">Ordered Items</label>
+                    <textarea id="order-summary" rows="4" placeholder="No items selected" readonly style="resize:vertical;"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="menu-preferences">Special Requests</label>
+                    <textarea id="menu-preferences" rows="4" placeholder="Anything we need to know"></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-accent">Submit Intake Request & Verify Date</button>
@@ -933,17 +938,18 @@
     // Sync state layout straight down to Form Note input area dynamically
     function syncOrderToTextarea() {
         const notesArea = document.getElementById("menu-preferences");
+        const orderArea = document.getElementById("order-summary");
         const summaryLines = [];
-        
+
         for (const [item, qty] of Object.entries(orderSelections)) {
             summaryLines.push(`• ${qty}x ${item}`);
         }
-        
-        if (summaryLines.length > 0) {
-            notesArea.value = `Requested Menu Selection:\n${summaryLines.join("\n")}`;
-        } else {
-            notesArea.value = ""; 
+
+        if (orderArea) {
+            orderArea.value = summaryLines.length > 0 ? summaryLines.join("\n") : "";
         }
+
+        // Leave `menu-preferences` as the freeform special-requests box (do not auto-fill it)
     }
 
     function switchMenuTab(element, categoryKey) {
@@ -988,15 +994,8 @@
             if (response.ok) {
                 submitBtn.innerText = "✓ REQUEST SUBMITTED!";
                 submitBtn.style.backgroundColor = "#28a745";
-                
-                setTimeout(() => {
-                    document.getElementById("cateringIntake").reset();
-                    for (const key in orderSelections) delete orderSelections[key];
-                    submitBtn.innerText = originalBtnText;
-                    submitBtn.style.backgroundColor = "";
-                    submitBtn.disabled = false;
-                    loadMenuModule("apps"); 
-                }, 4000);
+                // Show a confirmation modal with a snapshot of the submitted data
+                showSubmissionModal(formData);
             } else {
                 throw new Error('Network error');
             }
@@ -1015,12 +1014,87 @@
     .footer-portfolio{position:fixed;left:0;right:0;bottom:16px;display:flex;justify-content:center;pointer-events:none;z-index:220;transition:opacity .28s ease,transform .28s ease}
     .footer-portfolio a{pointer-events:auto;box-shadow:0 8px 20px rgba(0,0,0,0.25)}
     .footer-portfolio.hidden-overlap{opacity:0;transform:translateY(8px);pointer-events:none}
+
+    /* Submission modal styles */
+    .modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:9999}
+    .modal{width:min(760px,96%);background:var(--text-light);color:var(--text-dark);border-radius:12px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,0.4);position:relative}
+    .modal h3{margin:0 0 6px 0;font-size:1.4rem}
+    .modal .muted{opacity:0.8;margin:0 0 12px 0}
+    .modal-body{background:#f8f6f4;padding:12px;border-radius:8px;max-height:360px;overflow:auto;color:#222}
+    .modal pre{white-space:pre-wrap;margin:0;font-family:inherit}
+    .modal-close{position:absolute;right:18px;top:12px;background:transparent;border:none;font-size:22px;cursor:pointer}
+    .modal-overlay[hidden]{display:none}
 </style>
 <footer id="chef-portfolio-footer" class="footer-portfolio">
     <a href="collage.html" target="_blank" rel="noopener noreferrer" class="btn btn-accent">Chef Portfolio</a>
 </footer>
 
+<!-- Submission confirmation modal -->
+<div id="submission-modal" class="modal-overlay" hidden>
+    <div class="modal">
+        <button class="modal-close" aria-label="Close confirmation">×</button>
+        <h3>Request Submitted</h3>
+        <p class="muted">Thanks — we've received your intake request. Here's what you sent:</p>
+        <div class="modal-body" id="submission-snapshot"></div>
+        <div style="text-align:right;margin-top:12px;">
+            <button id="submission-done" class="btn btn-brand">Done</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Modal control: render a snapshot of the submitted data and show modal
+    function formatSubmissionSnapshot(data){
+        const lines = [];
+        lines.push(`<strong>Name:</strong> ${data.clientName || '-'}<br>`);
+        lines.push(`<strong>Phone:</strong> ${data.clientPhone || '-'}<br>`);
+        lines.push(`<strong>Email:</strong> ${data.clientEmail || '-'}<br>`);
+        lines.push(`<strong>Service Style:</strong> ${data.setup || '-'}<br>`);
+        lines.push(`<strong>Guests:</strong> ${data.guests || '-'}<br>`);
+        lines.push(`<strong>Date:</strong> ${data.date || '-'}<br>`);
+        lines.push(`<strong>Location:</strong> ${data.location || '-'}<br>`);
+        if (document.getElementById('order-summary')){
+            const ordered = document.getElementById('order-summary').value.trim();
+            lines.push(`<strong>Ordered Items:</strong><br>${ordered ? '<pre>'+ordered+'</pre>' : '<em>None</em>'}`);
+        }
+        if (data.notes){
+            lines.push(`<strong>Special Requests:</strong><br><pre>${data.notes}</pre>`);
+        }
+        return lines.join('\n');
+    }
+
+    function showSubmissionModal(data){
+        const modal = document.getElementById('submission-modal');
+        const snap = document.getElementById('submission-snapshot');
+        if (!modal || !snap) return;
+        snap.innerHTML = formatSubmissionSnapshot(data);
+        modal.removeAttribute('hidden');
+        // trap focus briefly
+        const close = modal.querySelector('.modal-close');
+        if (close) close.focus();
+    }
+
+    function hideSubmissionModal(){
+        const modal = document.getElementById('submission-modal');
+        if (!modal) return;
+        modal.setAttribute('hidden','');
+        // reset form, clear selections, restore button
+        const form = document.getElementById('cateringIntake');
+        if (form) form.reset();
+        for (const k in orderSelections) delete orderSelections[k];
+        syncOrderToTextarea();
+        const submitBtn = document.querySelector('#cateringIntake button[type="submit"]');
+        if (submitBtn){ submitBtn.innerText = 'Submit Intake Request & Verify Date'; submitBtn.style.backgroundColor=''; submitBtn.disabled=false; }
+        loadMenuModule('apps');
+    }
+
+    // wire modal buttons
+    document.addEventListener('click', function(e){
+        if (e.target && (e.target.id === 'submission-done' || e.target.classList.contains('modal-close'))){
+            hideSubmissionModal();
+        }
+    });
+
     // Hide the Chef Portfolio footer button while the Catering Menu (#menus) section is visible
     (function(){
         const footer = document.getElementById('chef-portfolio-footer');
