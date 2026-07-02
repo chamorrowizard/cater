@@ -494,11 +494,13 @@
             <div class="filter-tabs">
     <button class="tab-btn active" onclick="switchMenuTab(this, 'apps')">Appetizers</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'rolls')">Egg Rolls</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'mexican')">Mexican</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'sandos')">Sandos</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'burgers')">Grill-N-Burgers</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'fries')">Chill-N-Fries</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'breakfast')">Breakfast</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'sweets')">Sweet Finishes</button>
+            
 </div>
 
             <!-- Dynamic Menu Grid Output target -->
@@ -640,6 +642,46 @@
             { name: "Braised Pork Rolls", type: "Italian Gourmet Roll" },
             { name: "Chicken Alfredo Rolls", type: "Italian Gourmet Roll" },
             { name: "Pasta Rolls", type: "Italian Gourmet Roll" }
+        ],
+        mexican: [
+            // --- CATERING TRAYS & EXPERIENCES ---
+            { name: "TACO BAR Experience", type: "Mexican", desc: "Build-your-own premium layout. Includes Tortillas (soft flour, soft corn, hard shell corn, hard shell flour), corn chips, and tostada shells with your choice of proteins and a full custom toppings bar." },
+            { name: "MEXICAN GRAZING TRAY", type: "Mexican", desc: "The ultimate centerpiece: Guacamole, bean dip, salsa verde, salsa roja, pico de gallo, queso dip, sour cream, mini tacos, mini quesadillas, tamales, corn chips, mini tostada shells, corn nuts, fresh pineapple, watermelon, grapes, cucumber, radishes, grilled mini bell peppers, lime wedges, tajin seasoning, pickled jalapeños & carrots, and traditional Mexican candy." },
+            { name: "FIESTA TRAY", type: "Mexican", desc: "A crowd-pleasing setup featuring house corn chips, a premium selection of artisanal salsas, warm queso dips, and refreshing fresh seasonal fruit." },
+            { name: "STREET TACO TRAY", type: "Mexican", desc: "An elegant assortment of mini street-style tacos served alongside a curated selection of house toppings and signature hot salsas." },
+
+            // --- PREMIUM TACOS & BURRITOS ---
+            { name: "Tacos & Burritos Selection", type: "Mexican", desc: "Available with your choice of premium proteins: Shredded Chicken, Shredded Beef, Al Pastor, Birria, Carnitas, Carne Asada, Baja Fish, Shrimp, Veggie Fajitas, Philly Cheesesteak, Buffalo Chicken, or Surf & Turf." },
+            { name: "Signature Toppings Bar", type: "Mexican", desc: "Comes fully stocked with: Shredded lettuce, shredded cheese, diced tomatoes, diced onions, cilantro, guacamole, sour cream, pico de gallo, pickled onion, green onion, sliced jalapeño, chimichurri, lime wedges, roja salsa, verde salsa, white queso, yellow queso, queso fresco, buffalo sauce, red hot sauce, green hot sauce, feta cheese, and cotija cheese." },
+
+            // --- MAIN PLATTERS ---
+            { name: "Signature Enchiladas", type: "Mexican", desc: "Soft rolled tortillas baked with your choice of protein (Chicken, Steak, Pork, Birria, or Cheese) smothered in house sauce and melted cheese." },
+            { name: "Artisanal Tamales (Red or Green)", type: "Mexican", desc: "Traditional hand-wrapped corn husk tamales with your choice of filling: Chicken, Steak, Pork, or Chile Relleno." },
+            { name: "Chile Verde Pork Platter", type: "Mexican", desc: "Tender chunks of slow-braised pork shoulder simmered to perfection in a rich, flavorful roasted tomatillo and green chile sauce." },
+            { name: "Classic Chile Relleno", type: "Mexican", desc: "Roasted poblano peppers stuffed to the brim with melting cheese, dipped in a fluffy egg batter, and crisped to perfection." },
+            { name: "Pork Carnitas Platter", type: "Mexican", desc: "Authentic Michoacán-style slow-cooked pork, ultra-tender on the inside and beautifully crisped on the exterior." },
+            { name: "Pollo Asado", type: "Mexican", desc: "Flame-grilled chicken marinated in a robust blend of citrus juices, achiote, and traditional Mexican spices." },
+            { name: "Chicken Tinga Platter", type: "Mexican", desc: "Shredded chicken breast slow-simmered in a smoky, rich sauce crafted from chipotle chiles in adobo and sweet onions." },
+            { name: "Carne Asada Platter", type: "Mexican", desc: "Premium skirt steak thinly sliced and beautifully seared, bursting with citrus and garlic marinade notes." },
+            { name: "Shredded Beef Platter", type: "Mexican", desc: "Slow-braised, deeply savory shredded beef shoulder seasoned with roasted chiles and traditional aromatics." },
+            { name: "Beef Birria with Consommé", type: "Mexican", desc: "Traditional, deeply aromatic Mexican stewed beef served with its own rich, warm spiced dipping broth (consommé) for the ultimate finish." },
+
+            // --- TRADITIONAL SIDES ---
+            { name: "Mexican Sides Selection", type: "Mexican", desc: "Choose from our high-end classic options: Refried Beans, Pinto Beans, Black Beans, savory Mexican Rice, or rich Spanish Rice." },
+            { name: "Street Corn & Roasted Veggies", type: "Mexican", desc: "Authentic elote-style street corn off the cob alongside perfectly charred, seasoned fire-roasted market vegetables." },
+            { name: "Artisanal Mexican Salads", type: "Mexican", desc: "Fresh greens options: House Mixed Green Salad, Nopales (Cactus) Salad, crisp Mexican Caesar Salad, or a bright, tangy Mexican Cabbage Slaw." },
+
+            // --- HOUSE SOUPS ---
+            { name: "Traditional Pozole Soup", type: "Mexican", desc: "A deeply comforting, rich traditional broth loaded with tender pork and hominy, served with fresh cabbage, radishes, and lime garnishes." },
+            { name: "Chicken Tortilla Soup", type: "Mexican", desc: "A spicy, bright tomato-broth soup packed with pulled chicken, topped with crispy house tortilla strips, fresh avocado, and a splash of crema." },
+            { name: "Albondigas Soup", type: "Mexican", desc: "A classic, soul-warming Mexican meatball soup simmered with garden-fresh vegetables in a light, savory tomato-herb broth." },
+
+            // --- DESSERT TRAYS ---
+            { name: "Signature Churro Tray", type: "Mexican", desc: "Golden, crispy fried pastry dough tossed in cinnamon sugar, served warm with rich chocolate and caramel dipping sauces." },
+            { name: "Tres Leches Cake", type: "Mexican", desc: "An ultra-moist, traditional sponge cake soaked in a sweet mixture of three milks, topped with fresh whipped cream." },
+            { name: "Authentic Mexican Flan", type: "Mexican", desc: "A silky-smooth, elegant baked egg custard dressed in a rich, deeply golden amber caramel sauce layer." },
+            { name: "Fresh Fruit Cups", type: "Mexican", desc: "Beautifully refreshing street-style fruit cups loaded with seasonal melon, berries, and citrus." },
+            { name: "Concha Tray", type: "Mexican", desc: "An assortment of traditional Mexican sweet breads featuring a soft brioche-like interior and a signature crunchy shell-patterned sugar topping." }
         ],
         sandos: [
             { name: "Chicken Katsu", type: "Signature Sando" },
@@ -792,7 +834,6 @@
                 "Braised Pork Rolls": "",
                 "Chicken Alfredo Rolls": "",
                 "Pasta Rolls": "",
-
                 /* Sandos */
                 "Chicken Katsu": "Chicken-Katsu.jpg",
                 "Wagu Katsu": "",
@@ -847,6 +888,35 @@
                 "Sausage Egg & Cheese Sando": "",
                 "Bacon Sausage Ham Egg & Cheese Sando": "",
                 "Loco Moco Sando": "",
+
+                // --- MEXICAN MENU ENTRIES ---
+                "TACO BAR Experience": "",
+                "MEXICAN GRAZING TRAY": "",
+                "FIESTA TRAY": "",
+                "STREET TACO TRAY": "",
+                "Tacos & Burritos Selection": "",
+                "Signature Toppings Bar": "",
+                "Signature Enchiladas": "",
+                "Artisanal Tamales (Red or Green)": "",
+                "Chile Verde Pork Platter": "",
+                "Classic Chile Relleno": "",
+                "Pork Carnitas Platter": "",
+                "Pollo Asado": "",
+                "Chicken Tinga Platter": "",
+                "Carne Asada Platter": "",
+                "Shredded Beef Platter": "",
+                "Beef Birria with Consommé": "",
+                "Mexican Sides Selection": "",
+                "Street Corn & Roasted Veggies": "",
+                "Artisanal Mexican Salads": "",
+                "Traditional Pozole Soup": "",
+                "Chicken Tortilla Soup": "",
+                "Albondigas Soup": "",
+                "Signature Churro Tray": "",
+                "Tres Leches Cake": "",
+                "Authentic Mexican Flan": "",
+                "Fresh Fruit Cups": "",
+                "Concha Tray": "",
 
                 /* Sweets */
                 "Peach Cobbler Roll": "",
