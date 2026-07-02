@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Egg Roll & Sando's - Catering</title>
+    <style>
+        /* ==========================================
+           COLOR THEME & VARIABLES
+           Change these values to update colors globally
+           ========================================== */
+        :root {
+            --bg-dark: #1a1513;         /* Dark charcoal / espresso */
+            --bg-brand: #d9381e;        /* Bold, appetizing brand red/orange */
+            --bg-light: #fdfbf7;        /* Clean, warm ivory cream */
+            --accent-warm: #f2a900;     /* Golden egg yolk yellow */
+            --text-dark: #2b2523;       /* Primary text */
+            --text-light: #ffffff;      /* Light text */
+            --border-muted: #e6e1da;    /* Subtle borders */
+            --placeholder-bg: #ecdcc9;  /* Image placeholder fill */
+            
+            /* Fonts */
+            --font-header: 'Impact', 'Arial Black', sans-serif; /* Punchy, street-food style headers */
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ==========================================
+           BASE STYLES
+           ========================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-header);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Image placeholder setup */
+        .img-placeholder {
+            background-color: var(--placeholder-bg);
+            border: 2px dashed rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0,0,0,0.4);
+            font-weight: bold;
+            font-size: 0.8rem;
+            min-height: 160px;
+            border-radius: 6px;
+            text-align: center;
+            padding: 15px;
+            text-transform: uppercase;
+        }
+
+                /* Polished placeholder + image fit */
+                .img-placeholder {
+                    overflow: hidden;
+                    position: relative;
+                    border-radius: 8px;
+                    min-height: 160px;
+                    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+                    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+                    transition: transform 0.25s ease, box-shadow 0.25s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                /* Slight lift on hover for a tactile feel */
+                .img-placeholder:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+                }
+
+                /* Force images to cover the area, remain centered, and be responsive */
+                .img-placeholder img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    border-radius: inherit;
+                    transition: transform 0.4s ease;
+                }
+
+                /* Gentle zoom on hover */
+                .img-placeholder:hover img {
+                    transform: scale(1.05);
+                }
+
+                /* Helpful aspect control for consistent card heights */
+                .menu-card .img-placeholder { aspect-ratio: 4 / 3; }
+                .hero-media .img-placeholder { aspect-ratio: 16 / 9; min-height: 220px; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.1s ease, background-color 0.2s ease;
+            text-align: center;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-brand {
+            background-color: var(--bg-brand);
+            color: var(--text-light);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-warm);
+            color: var(--bg-dark);
+        }
+
+        /* ==========================================
+           HEADER / NAVIGATION
+           ========================================== */
+        header {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--accent-warm);
+            text-shadow: 2px 2px 0px var(--bg-brand);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-warm);
+        }
+
+        /* ==========================================
+           HERO SECTION
+           ========================================== */
+        .hero {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 100px 0;
+            border-bottom: 8px solid var(--bg-brand);
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1.2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-warm);
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-media {
+            flex: 0.8;
+            width: 100%;
+        }
+
+        .hero-media .img-placeholder {
+            height: 380px;
+            border-color: rgba(255,255,255,0.2);
+            color: var(--text-light);
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* ==========================================
+           MENU FILTER HUB
+           ========================================== */
+        .menu-experience {
+            background-color: var(--bg-brand);
+            color: var(--text-light);
+            padding: 80px 0;
+        }
+
+        .menu-experience h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .menu-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            border-radius: 40px;
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--accent-warm);
+            color: var(--bg-dark);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-card {
+            background-color: var(--text-light);
+            color: var(--text-dark);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-card .img-placeholder {
+            margin-bottom: 15px;
+        }
+
+        .menu-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--bg-dark);
+            border-bottom: 2px solid var(--accent-warm);
+            padding-bottom: 4px;
+        }
+
+        .menu-card p {
+            font-size: 0.9rem;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        /* ==========================================
+           CATERING INTAKE FORM
+           ========================================== */
+        .booking-section {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 80px 0;
+        }
+
+        .booking-section h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 3rem;
+            color: var(--accent-warm);
+        }
+
+        .booking-section p {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .booking-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            background: rgba(255,255,255,0.03);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-warm);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 14px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background-color: rgba(255,255,255,0.05);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-warm);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .form-group select option {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .booking-form .btn {
+            grid-column: span 2;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* ==========================================
+           RESPONSIVE DESIGN (Android, iOS & Tablet)
+           ========================================== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .hero-media .img-placeholder {
+                height: 220px;
+            }
+
+            .menu-experience h2, .booking-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .booking-form {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            .booking-form .btn {
+                grid-column: span 1;
+            }
+
+            .nav-links {
+                display: none; /* Keeps structural header clean across mobile builds */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV HEADER -->
+    <header>
+        <div class="container">
+            <div class="logo">KING EGG ROLL & SANDO'S</div>
+            <ul class="nav-links">
+                <li><a href="#menus">Catering Menus</a></li>
+                <li><a href="#book">Book Catering</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO PROFILE -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>KING EGG ROLL <span>& SANDO'S</span></h1>
+                <p>Epic fusion egg rolls and heavy-hitting sandos built to crowd-please. Bring dynamic flavor stations, appetizers, and sweet rolls to your next major gathering.</p>
+                <div class="hero-actions">
+                    <a href="#menus" class="btn btn-accent">Explore the Menu Hub</a>
+                    <a href="#book" class="btn btn-brand">Secure Event Date</a>
+                </div>
+            </div>
+            <div class="hero-media">
+                <div class="img-placeholder">
+                    <img src="./images/Chicken-Katsu.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MENU ZONE -->
+    <section id="menus" class="menu-experience">
+        <div class="container">
+            <h2>Catering Menu Modules</h2>
+            <p class="menu-subtitle">Select a category path below to preview our massive selection of custom hand-rolled creations and Sandos.</p>
+            
+            <div class="filter-tabs">
+    <button class="tab-btn active" onclick="switchMenuTab(this, 'apps')">Appetizers</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'rolls')">Egg Rolls</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'mexican')">Mexican</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'sandos')">Sandos</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'burgers')">Grill-N-Burgers</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'fries')">Chill-N-Fries</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'breakfast')">Breakfast</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'sweets')">Sweet Finishes</button>
+            
+</div>
+
+            <!-- Dynamic Menu Grid Output target -->
+            <div class="menu-grid" id="menu-cards-target">
+                <!-- Javascript will load items perfectly here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENT BOOKING ENGINE -->
+    <section id="book" class="booking-section">
+        <div class="container">
+            <h2>Lock In Your Custom Feast</h2>
+            <p>Tell us about your headcount and logistics, and we will tailor an epic rollout package for your budget.</p>
+            
+            <form class="booking-form" id="cateringIntake">
+                <!-- ANTI-BOT HONEYPOT FIELD (Hidden from humans) -->
+            <input type="text" name="_gotcha" style="display:none" />
+                <div class="form-group">
+                    <label for="event-profile">Catering Setup Required *</label>
+                    <select id="event-profile" required>
+                        <option value="">Choose Service Style...</option>
+                        <option value="station">Interactive Live Roll Station</option>
+                        <option value="buffet">Heavy Platter Buffet Showcase</option>
+                        <option value="dropoff">Gourmet Boxed Drop-off Delivery</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-volume">Estimated Guest Volume *</label>
+                    <input type="number" id="guest-volume" placeholder="e.g. 75, 150, 300+" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="target-date">Target Event Date *</label>
+                    <input type="date" id="target-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location-space">Venue City / Neighborhood</label>
+                    <input type="text" id="location-space" placeholder="e.g. Downtown, Convention Hall, Private Space">
+                </div>
+                <!-- REFINED MOBILE-RESPONSIVE CONTACT SECTION -->
+<div class="contact-info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 15px;">
+    <div class="form-group">
+        <label for="client-name">Full Name *</label>
+        <input type="text" id="client-name" placeholder="First Last" style="width: 100%; box-sizing: border-box;" required />
+    </div>
+    <div class="form-group">
+        <label for="client-phone">Phone Number *</label>
+        <input type="tel" id="client-phone" placeholder="Phone Number" style="width: 100%; box-sizing: border-box;" required />
+    </div>
+</div>
+
+<div class="form-group" style="margin-bottom: 15px;">
+    <label for="client-email">Email Address *</label>
+    <input type="email" id="client-email" placeholder="your-email@example.com" style="width: 100%; box-sizing: border-box;" required />
+</div>
+                <div class="form-group full-width">
+                    <label for="order-summary">Ordered Items</label>
+                    <textarea id="order-summary" rows="4" placeholder="No items selected" readonly style="resize:vertical;"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="menu-preferences">Special Requests</label>
+                    <textarea id="menu-preferences" rows="4" placeholder="Anything we need to know"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-accent">Submit Intake Request & Verify Date</button>
+            </form>
+        </div>
+    </section>
+<!-- ==========================================
+   JAVASCRIPT ARCHITECTURE ENGINE (MANUAL QUANTITY INPUT)
+   ========================================== -->
+<script>
+    // 1. Structured Database (Poke's Full Menu Config)
+    const database = {
+        apps: [
+            // --- CHARCUTERIE & GRAZING TIERS ---
+            { name: "Small Charcuterie Board (2-8 people)", type: "Appetizer", desc: "Assorted Italian meats, Assorted domestic cheese, crackers, mixed nuts, and dried fruit." },
+            { name: "Medium Charcuterie Board (8-12 people)", type: "Appetizer", desc: "Assorted Italian meats, Assorted domestic cheese, crackers, bread, mixed nuts, dried fruit, and fresh grapes." },
+            { name: "Large Charcuterie Board (12-24 people)", type: "Appetizer", desc: "Assorted Italian meats, Assorted domestic cheese, crackers, crostini, bread, mixed nuts, dried fruit, fresh grapes, olives, and cornichons." },
+            { name: "Grazing Tray (24+ people)", type: "Appetizer", desc: "Assorted Italian meats, Assorted domestic cheese, crackers, crostini, bread, mixed nuts, dried fruit, fresh fruits, olives, cornichons, sweet treats, and macaroons." },
+
+            // --- CATERING FRUIT PLATTERS ---
+            { name: "Fruit Platter Small (2-4 people)", type: "Appetizer", desc: "Pineapple, cantaloupe, honeydew, watermelon, strawberries, raspberries, blackberries, and blueberries." },
+            { name: "Fruit Platter Medium (6-10 people)", type: "Appetizer", desc: "Pineapple, cantaloupe, honeydew, watermelon, strawberries, raspberries, blackberries, blueberries, orange slices, and kiwi." },
+            { name: "Fruit Platter Large (10-20 people)", type: "Appetizer", desc: "Pineapple, cantaloupe, honeydew, watermelon, strawberries, raspberries, blackberries, blueberries, orange slices, kiwi, mango, dragon fruit, figs, seasonal fruits, and berries." },
+            { name: "Fruit Tray Large (20+ people)", type: "Appetizer", desc: "Pineapple, cantaloupe, honeydew, watermelon, strawberries, raspberries, blackberries, blueberries, orange slices, kiwi, mango, dragon fruit, figs, seasonal fruits, and berries served with yogurt dip, honey dip, tajin, and chamoy." },
+
+            // --- CURATED FRUIT BOWLS ---
+            { name: "Fruit Bowl Small (4+ people)", type: "Appetizer", desc: "A fresh, balanced bowl featuring 2 bananas, 2 apples, 2 oranges, and 2 pears." },
+            { name: "Fruit Bowl Medium (8+ people)", type: "Appetizer", desc: "A crowd-pleasing setup featuring 4 bananas, 4 apples, 4 oranges, and 4 pears." },
+            { name: "Fruit Bowl Large (12+ people)", type: "Appetizer", desc: "An expanded setup featuring 4 bananas, 4 apples, 4 oranges, 4 pears, and 4 nectarines." },
+            { name: "Fruit Bowl XL (24+ people)", type: "Appetizer", desc: "Ultimate display with 6 bananas, 6 assorted apples, 6 assorted oranges, 6 assorted pears, 6 nectarines, grapes, and strawberries." },
+
+            // --- MEDITERRANEAN & HUMMUS SKIDS ---
+            { name: "Mezze Platter Large", type: "Appetizer", desc: "Hummus, red pepper hummus, baba ganoush, tzatziki, pita bread, stuffed & assorted olives, falafel, dolmas, roasted veggies, salad, feta cheese, cucumber slices, and carrots." },
+            { name: "Hummus Board", type: "Appetizer", desc: "Classic hummus, carrots, cucumbers, roasted bell peppers, assorted olives, pita, and feta cheese." },
+            { name: "Hummus Platter", type: "Appetizer", desc: "Premium classic hummus, red bell pepper hummus, carrots, cucumbers, roasted bell peppers, assorted & stuffed olives, pita, and feta cheese." },
+
+            // --- ORIGINAL APP BASELINES ---
+            { name: "Chicken Skin Plain", type: "Appetizer" },
+            { name: "Chicken Skin Nachos", type: "Appetizer" },
+            { name: "Edamame Plain", type: "Appetizer" },
+            { name: "Spicy Garlic Edamame", type: "Appetizer" },
+            { name: "Cucumber Salad", type: "Appetizer" },
+            { name: "Spicy Cucumber Salad", type: "Appetizer" },
+            { name: "BBQ Corn Ribs", type: "Appetizer" },
+            { name: "Aztec Corn Ribs", type: "Appetizer" },
+            { name: "Aztec Fries", type: "Appetizer" },
+            { name: "Pizza Fries", type: "Appetizer" },
+            { name: "Steak Fries", type: "Appetizer" }
+        ],
+        rolls: [
+            { name: "Steamed Veggie Roll", type: "Asian Fusion Roll" },
+            { name: "Traditional Veggie Egg Roll", type: "Asian Fusion Roll" },
+            { name: "Chicken Egg Roll", type: "Asian Fusion Roll" },
+            { name: "Pork Egg Rolls", type: "Asian Fusion Roll" },
+            { name: "Steak Egg Rolls", type: "Asian Fusion Roll" },
+            { name: "Loco Moco Rolls", type: "Asian Fusion Roll" },
+            { name: "Philly Rolls", type: "American Classic Roll" },
+            { name: "Buffalo Rolls", type: "American Classic Roll" },
+            { name: "BBQ Pulled Pork Roll", type: "American Classic Roll" },
+            { name: "Cheese Burger Roll", type: "American Classic Roll" },
+            { name: "Bacon Mac & Cheese Roll", type: "American Classic Roll" },
+            { name: "Birria Roll", type: "Aztec Signature Roll" },
+            { name: "Beef Taco Roll", type: "Aztec Signature Roll" },
+            { name: "Steak Taco Roll", type: "Aztec Signature Roll" },
+            { name: "Chicken Taco Roll", type: "Aztec Signature Roll" },
+            { name: "Chili Verde Roll", type: "Aztec Signature Roll" },
+            { name: "Elote Roll", type: "Aztec Signature Roll" },
+            { name: "Queso Rolls", type: "Aztec Signature Roll" },
+            { name: "Chicken Parm Roll", type: "Italian Gourmet Roll" },
+            { name: "Pizza Roll", type: "Italian Gourmet Roll" },
+            { name: "Lasagna Rolls", type: "Italian Gourmet Roll" },
+            { name: "Italian Sausage Rolls", type: "Italian Gourmet Roll" },
+            { name: "Braised Pork Rolls", type: "Italian Gourmet Roll" },
+            { name: "Chicken Alfredo Rolls", type: "Italian Gourmet Roll" },
+            { name: "Pasta Rolls", type: "Italian Gourmet Roll" }
+        ],
+        mexican: [
+            // --- CATERING TRAYS & EXPERIENCES ---
+            { name: "TACO BAR Experience", type: "Mexican", desc: "Build-your-own premium layout. Includes Tortillas (soft flour, soft corn, hard shell corn, hard shell flour), corn chips, and tostada shells with your choice of proteins and a full custom toppings bar." },
+            { name: "MEXICAN GRAZING TRAY", type: "Mexican", desc: "The ultimate centerpiece: Guacamole, bean dip, salsa verde, salsa roja, pico de gallo, queso dip, sour cream, mini tacos, mini quesadillas, tamales, corn chips, mini tostada shells, corn nuts, fresh pineapple, watermelon, grapes, cucumber, radishes, grilled mini bell peppers, lime wedges, tajin seasoning, pickled jalapeños & carrots, and traditional Mexican candy." },
+            { name: "FIESTA TRAY", type: "Mexican", desc: "A crowd-pleasing setup featuring house corn chips, a premium selection of artisanal salsas, warm queso dips, and refreshing fresh seasonal fruit." },
+            { name: "STREET TACO TRAY", type: "Mexican", desc: "An elegant assortment of mini street-style tacos served alongside a curated selection of house toppings and signature hot salsas." },
+
+            // --- PREMIUM TACOS & BURRITOS ---
+            { name: "Tacos & Burritos Selection", type: "Mexican", desc: "Available with your choice of premium proteins: Shredded Chicken, Shredded Beef, Al Pastor, Birria, Carnitas, Carne Asada, Baja Fish, Shrimp, Veggie Fajitas, Philly Cheesesteak, Buffalo Chicken, or Surf & Turf." },
+            { name: "Signature Toppings Bar", type: "Mexican", desc: "Comes fully stocked with: Shredded lettuce, shredded cheese, diced tomatoes, diced onions, cilantro, guacamole, sour cream, pico de gallo, pickled onion, green onion, sliced jalapeño, chimichurri, lime wedges, roja salsa, verde salsa, white queso, yellow queso, queso fresco, buffalo sauce, red hot sauce, green hot sauce, feta cheese, and cotija cheese." },
+
+            // --- MAIN PLATTERS ---
+            { name: "Signature Enchiladas", type: "Mexican", desc: "Soft rolled tortillas baked with your choice of protein (Chicken, Steak, Pork, Birria, or Cheese) smothered in house sauce and melted cheese." },
+            { name: "Artisanal Tamales (Red or Green)", type: "Mexican", desc: "Traditional hand-wrapped corn husk tamales with your choice of filling: Chicken, Steak, Pork, or Chile Relleno." },
+            { name: "Chile Verde Pork Platter", type: "Mexican", desc: "Tender chunks of slow-braised pork shoulder simmered to perfection in a rich, flavorful roasted tomatillo and green chile sauce." },
+            { name: "Classic Chile Relleno", type: "Mexican", desc: "Roasted poblano peppers stuffed to the brim with melting cheese, dipped in a fluffy egg batter, and crisped to perfection." },
+            { name: "Pork Carnitas Platter", type: "Mexican", desc: "Authentic Michoacán-style slow-cooked pork, ultra-tender on the inside and beautifully crisped on the exterior." },
+            { name: "Pollo Asado", type: "Mexican", desc: "Flame-grilled chicken marinated in a robust blend of citrus juices, achiote, and traditional Mexican spices." },
+            { name: "Chicken Tinga Platter", type: "Mexican", desc: "Shredded chicken breast slow-simmered in a smoky, rich sauce crafted from chipotle chiles in adobo and sweet onions." },
+            { name: "Carne Asada Platter", type: "Mexican", desc: "Premium skirt steak thinly sliced and beautifully seared, bursting with citrus and garlic marinade notes." },
+            { name: "Shredded Beef Platter", type: "Mexican", desc: "Slow-braised, deeply savory shredded beef shoulder seasoned with roasted chiles and traditional aromatics." },
+            { name: "Beef Birria with Consommé", type: "Mexican", desc: "Traditional, deeply aromatic Mexican stewed beef served with its own rich, warm spiced dipping broth (consommé) for the ultimate finish." },
+
+            // --- TRADITIONAL SIDES ---
+            { name: "Mexican Sides Selection", type: "Mexican", desc: "Choose from our high-end classic options: Refried Beans, Pinto Beans, Black Beans, savory Mexican Rice, or rich Spanish Rice." },
+            { name: "Street Corn & Roasted Veggies", type: "Mexican", desc: "Authentic elote-style street corn off the cob alongside perfectly charred, seasoned fire-roasted market vegetables." },
+            { name: "Artisanal Mexican Salads", type: "Mexican", desc: "Fresh greens options: House Mixed Green Salad, Nopales (Cactus) Salad, crisp Mexican Caesar Salad, or a bright, tangy Mexican Cabbage Slaw." },
+
+            // --- HOUSE SOUPS ---
+            { name: "Traditional Pozole Soup", type: "Mexican", desc: "A deeply comforting, rich traditional broth loaded with tender pork and hominy, served with fresh cabbage, radishes, and lime garnishes." },
+            { name: "Chicken Tortilla Soup", type: "Mexican", desc: "A spicy, bright tomato-broth soup packed with pulled chicken, topped with crispy house tortilla strips, fresh avocado, and a splash of crema." },
+            { name: "Albondigas Soup", type: "Mexican", desc: "A classic, soul-warming Mexican meatball soup simmered with garden-fresh vegetables in a light, savory tomato-herb broth." },
+
+            // --- DESSERT TRAYS ---
+            { name: "Signature Churro Tray", type: "Mexican", desc: "Golden, crispy fried pastry dough tossed in cinnamon sugar, served warm with rich chocolate and caramel dipping sauces." },
+            { name: "Tres Leches Cake", type: "Mexican", desc: "An ultra-moist, traditional sponge cake soaked in a sweet mixture of three milks, topped with fresh whipped cream." },
+            { name: "Authentic Mexican Flan", type: "Mexican", desc: "A silky-smooth, elegant baked egg custard dressed in a rich, deeply golden amber caramel sauce layer." },
+            { name: "Fresh Fruit Cups", type: "Mexican", desc: "Beautifully refreshing street-style fruit cups loaded with seasonal melon, berries, and citrus." },
+            { name: "Concha Tray", type: "Mexican", desc: "An assortment of traditional Mexican sweet breads featuring a soft brioche-like interior and a signature crunchy shell-patterned sugar topping." }
+        ],
+        sandos: [
+            { name: "Chicken Katsu", type: "Signature Sando" },
+            { name: "Wagu Katsu", type: "Signature Sando" },
+            { name: "Pork Katsu", type: "Signature Sando" },
+            { name: "Steak Sando", type: "Signature Sando" },
+            { name: "Buffalo Sando", type: "Signature Sando" },
+            { name: "Pull Pork Sando", type: "Signature Sando" },
+            { name: "Veggie Sando", type: "Signature Sando" },
+            { name: "Chicken Parm Sando", type: "Signature Sando" },
+            { name: "Italian Sausage Sando", type: "Signature Sando" },
+            { name: "Braised Pork Sando", type: "Signature Sando" },
+            { name: "Philly Sando", type: "Signature Sando" }
+        ],
+        burgers: [
+            { name: "All American Burger", type: "Grill-N-Burger", desc: "American Cheese, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, Chili sauce." },
+            { name: "The Texas Burger", type: "Grill-N-Burger", desc: "American and Cheddar Cheese, Bacon, Caramelized Onions, BBQ Sauce." },
+            { name: "The Big D Burger", type: "Grill-N-Burger", desc: "Two Beef Patties, Four Slices Of American Cheese, Pickles, Chili Sauce." },
+            { name: "O.G. With Cheese", type: "Grill-N-Burger", desc: "American Cheese, Ketchup, Mustard, Pickles, Caramelized Onions." },
+            { name: "Jalapeño Popper Burger", type: "Grill-N-Burger", desc: "Bacon, jalapeños, Pepper Jack & Cream Cheese Whiz." },
+            { name: "LocoMoco Burger", type: "Grill-N-Burger", desc: "American cheese, white rice, gravy, spam, egg & more gravy." },
+            { name: "Goldie Mac Burger", type: "Grill-N-Burger", desc: "Pepper jack, cheesy mac, Bacon, elote cheese dusted bun." },
+            { name: "Chili Mac Burger", type: "Grill-N-Burger", desc: "Pepper jack, cheesy mac, chili, elote dusted bun." },
+            { name: "Chili Chili Burger", type: "Grill-N-Burger", desc: "American cheese, chili, cheese sauce." },
+            { name: "T-Bird Burger", type: "Grill-N-Burger", desc: "Turkey patty, bacon, choice of cheese, avocado, lettuce, tomatoes, pickles and garlic aioli." },
+            { name: "Jive Turkey Burger", type: "Grill-N-Burger", desc: "Turkey patty, pepper jack cheese, jalapenos, grilled onions, lettuce, tomato, garlic aioli." },
+            { name: "The Mile High Club", type: "Grill-N-Burger", desc: "Turkey patty, beef patty, spam, three slices of american cheese, garlic aioli, lettuce, tomatoes and pickles." },
+            { name: "Plain Jane Burger", type: "Grill-N-Burger", desc: "Burger Patty, Bun." }
+        ],
+        fries: [
+            { name: "All American Fries", type: "Chill-N-Fries & Wraps", desc: "Loaded with a 1/4 lb of seasoned ground beef, American Cheese Whiz, Bacon, Caramelized Onions, Lettuce, Tomato, Pickles, Garlic Aioli, and Chili sauce." },
+            { name: "The Texas Fries", type: "Chill-N-Fries & Wraps", desc: "Loaded with a 1/4 lb of seasoned ground beef, American Cheese Whiz, Bacon, Caramelized Onions, and tangy BBQ Sauce." },
+            { name: "The Big D Fries", type: "Chill-N-Fries & Wraps", desc: "Loaded with a 1/4 lb of seasoned ground beef, a juicy beef patty, American Cheese Whiz, Chili Sauce, and Pickles." },
+            { name: "O.G. With Cheese Fries", type: "Chill-N-Fries & Wraps", desc: "Loaded with a 1/4 lb of seasoned ground beef, American Cheese Whiz, Ketchup, Mustard, Pickles, and Caramelized Onions." },
+            { name: "Jalapeño Popper Fries", type: "Chill-N-Fries & Wraps", desc: "Loaded with a 1/4 lb of seasoned ground beef, crispy Bacon, jalapeños, and a rich Pepper Jack & Cream Cheese Whiz." },
+            { name: "LocoMoco Fries", type: "Chill-N-Fries & Wraps", desc: "Loaded with a 1/4 lb of seasoned ground beef, a savory beef patty, rich gravy, spam, egg, and cheese sauce." },
+            { name: "Chili Chili Fries", type: "Chill-N-Fries & Wraps", desc: "Smothered in our signature beef chili, rich cheese sauce, and an extra layer of melted cheese sauce." }, // No extra beef added here since it's already in the chili base
+            { name: "Plain Jane Fries", type: "Chill-N-Fries & Wraps", desc: "Classic golden fries seasoned perfectly with Salt, Pepper, Garlic, and Onion." },
+            { name: "Chill-N-Fries Sampler", type: "Chill-N-Fries & Wraps", desc: "Custom event curation profile: Choose up to 3 standard Chill-N-Fries configurations." },
+            { name: "16 oz Cup of Mac", type: "Side Dish", desc: "Premium house-made side profile mac serving." },
+            { name: "16 oz Cup of Chili", type: "Side Dish", desc: "Premium house-made signature hearty side chili serving loaded with seasoned beef." }
+        ],
+        breakfast: [
+            { name: "Spam & Egg Roll", type: "Breakfast Roll" },
+            { name: "Ham Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Bacon Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Sausage Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Bacon Sausage Ham Egg & Cheese Roll", type: "Breakfast Roll" },
+            { name: "Loco Moco Roll", type: "Breakfast Roll" },
+            { name: "Spam & Egg Sando", type: "Breakfast Sando" },
+            { name: "Ham Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Bacon Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Sausage Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Bacon Sausage Ham Egg & Cheese Sando", type: "Breakfast Sando" },
+            { name: "Loco Moco Sando", type: "Breakfast Sando" }
+        ],
+        sweets: [
+            { name: "Peach Cobbler Roll", type: "Sweet Signature Roll" },
+            { name: "Cheesecake Roll", type: "Sweet Signature Roll" },
+            { name: "Strawberry & Cream Roll", type: "Sweet Signature Roll" },
+            { name: "Mango Roll", type: "Sweet Signature Roll" },
+            { name: "Blueberries & Cream", type: "Sweet Signature Roll" },
+            { name: "Apple Roll", type: "Sweet Signature Roll" },
+            { name: "Peach Cobbler Sando", type: "Sweet Sando Finisher" },
+            { name: "Cheesecake Sando", type: "Sweet Sando Finisher" },
+            { name: "Strawberry & Cream Sando", type: "Sweet Sando Finisher" },
+            { name: "Mango Sando", type: "Sweet Sando Finisher" },
+            { name: "Blueberries & Cream Sando", type: "Sweet Sando Finisher" },
+            { name: "Apple Sando", type: "Sweet Sando Finisher" }
+        ]
+    };
+
+    // Global session state memory tracking card orders
+    const orderSelections = {};
+
+    // UI rendering module
+    function loadMenuModule(categoryKey) {
+        const gridTarget = document.getElementById("menu-cards-target");
+        gridTarget.innerHTML = ""; 
+
+        database[categoryKey].forEach(item => {
+            const card = document.createElement("div");
+            card.className = "menu-card";
+            card.style.cursor = "pointer";
+            card.style.position = "relative";
+            
+            const currentQty = orderSelections[item.name] || 0;
+            const itemDesc = item.desc ? item.desc : "Available for full scale event booking configurations as part of our signature catering tiers.";
+            
+            // Local mapping array to pair available image assets to their precise item names
+            const imageMap = {
+                /* Apps */
+                "Chicken Skin Plain": "",
+                "Chicken Skin Nachos": "",
+                "Edamame Plain": "",
+                "Spicy Garlic Edamame": "",
+                "Cucumber Salad": "",
+                "Spicy Cucumber Salad": "",
+                "BBQ Corn Ribs": "",
+                "Aztec Corn Ribs": "",
+                "Aztec Fries": "",
+                "Pizza Fries": "",
+                "Steak Fries": "",
+                // --- CHARCUTERIE & GRAZING TIERS ---
+            "Small Charcuterie Board (2-8 people)": "",
+            "Medium Charcuterie Board (8-12 people)": "",
+            "Large Charcuterie Board (12-24 people)": "",
+            "Grazing Tray (24+ people)": "",
+
+            // --- CATERING FRUIT PLATTERS ---
+            "Fruit Platter Small (2-4 people)": "",
+            "Fruit Platter Medium (6-10 people)": "",
+            "Fruit Platter Large (10-20 people)": "",
+            "Fruit Tray Large (20+ people)": "",
+
+            // --- CURATED FRUIT BOWLS ---
+            "Fruit Bowl Small (4+ people)": "",
+            "Fruit Bowl Medium (8+ people)": "",
+            "Fruit Bowl Large (12+ people)": "",
+            "Fruit Bowl XL (24+ people)": "",
+
+            // --- MEDITERRANEAN & HUMMUS SKIDS ---
+            "Mezze Platter Large": "",
+            "Hummus Board": "",
+            "Hummus Platter": "",
+
+                /* Rolls */
+                "Steamed Veggie Roll": "",
+                "Traditional Veggie Egg Roll": "",
+                "Chicken Egg Roll": "",
+                "Pork Egg Rolls": "",
+                "Steak Egg Rolls": "",
+                "Loco Moco Rolls": "",
+                "Philly Rolls": "",
+                "Buffalo Rolls": "",
+                "BBQ Pulled Pork Roll": "",
+                "Cheese Burger Roll": "",
+                "Bacon Mac & Cheese Roll": "",
+                "Birria Roll": "",
+                "Beef Taco Roll": "",
+                "Steak Taco Roll": "",
+                "Chicken Taco Roll": "",
+                "Chili Verde Roll": "",
+                "Elote Roll": "",
+                "Queso Rolls": "",
+                "Chicken Parm Roll": "",
+                "Pizza Roll": "",
+                "Lasagna Rolls": "",
+                "Italian Sausage Rolls": "",
+                "Braised Pork Rolls": "",
+                "Chicken Alfredo Rolls": "",
+                "Pasta Rolls": "",
+                /* Sandos */
+                "Chicken Katsu": "Chicken-Katsu.jpg",
+                "Wagu Katsu": "",
+                "Pork Katsu": "",
+                "Steak Sando": "",
+                "Buffalo Sando": "",
+                "Pull Pork Sando": "",
+                "Veggie Sando": "",
+                "Chicken Parm Sando": "",
+                "Italian Sausage Sando": "",
+                "Braised Pork Sando": "",
+                "Philly Sando": "",
+
+                /* Burgers */
+                "All American Burger": "",
+                "The Texas Burger": "",
+                "The Big D Burger": "",
+                "O.G. With Cheese": "",
+                "Jalapeño Popper Burger": "",
+                "LocoMoco Burger": "",
+                "Goldie Mac Burger": "",
+                "Chili Mac Burger": "",
+                "Chili Chili Burger": "",
+                "T-Bird Burger": "",
+                "Jive Turkey Burger": "",
+                "The Mile High Club": "",
+                "Plain Jane Burger": "",
+
+                /* Fries */
+                "All American Fries": "",
+                "The Texas Fries": "",
+                "The Big D Fries": "",
+                "O.G. With Cheese Fries": "",
+                "Jalapeño Popper Fries": "",
+                "LocoMoco Fries": "",
+                "Chili Chili Fries": "",
+                "Plain Jane Fries": "",
+                "Chill-N-Fries Sampler": "",
+                "16 oz Cup of Mac": "",
+                "16 oz Cup of Chili": "",
+
+                /* Breakfast */
+                "Spam & Egg Roll": "",
+                "Ham Egg & Cheese Roll": "",
+                "Bacon Egg & Cheese Roll": "",
+                "Sausage Egg & Cheese Roll": "",
+                "Bacon Sausage Ham Egg & Cheese Roll": "",
+                "Loco Moco Roll": "",
+                "Spam & Egg Sando": "",
+                "Ham Egg & Cheese Sando": "",
+                "Bacon Egg & Cheese Sando": "",
+                "Sausage Egg & Cheese Sando": "",
+                "Bacon Sausage Ham Egg & Cheese Sando": "",
+                "Loco Moco Sando": "",
+
+                // --- MEXICAN MENU ENTRIES ---
+                "TACO BAR Experience": "",
+                "MEXICAN GRAZING TRAY": "",
+                "FIESTA TRAY": "",
+                "STREET TACO TRAY": "",
+                "Tacos & Burritos Selection": "",
+                "Signature Toppings Bar": "",
+                "Signature Enchiladas": "",
+                "Artisanal Tamales (Red or Green)": "",
+                "Chile Verde Pork Platter": "",
+                "Classic Chile Relleno": "",
+                "Pork Carnitas Platter": "",
+                "Pollo Asado": "",
+                "Chicken Tinga Platter": "",
+                "Carne Asada Platter": "",
+                "Shredded Beef Platter": "",
+                "Beef Birria with Consommé": "",
+                "Mexican Sides Selection": "",
+                "Street Corn & Roasted Veggies": "",
+                "Artisanal Mexican Salads": "",
+                "Traditional Pozole Soup": "",
+                "Chicken Tortilla Soup": "",
+                "Albondigas Soup": "",
+                "Signature Churro Tray": "",
+                "Tres Leches Cake": "",
+                "Authentic Mexican Flan": "",
+                "Fresh Fruit Cups": "",
+                "Concha Tray": "",
+
+                /* Sweets */
+                "Peach Cobbler Roll": "",
+                "Cheesecake Roll": "",
+                "Strawberry & Cream Roll": "",
+                "Mango Roll": "",
+                "Blueberries & Cream": "",
+                "Apple Roll": "",
+                "Peach Cobbler Sando": "",
+                "Cheesecake Sando": "",
+                "Strawberry & Cream Sando": "",
+                "Mango Sando": "",
+                "Blueberries & Cream Sando": "",
+                "Apple Sando": ""
+            };
+
+            // Fallback gracefully to hide the image block entirely if no image is mapped yet
+            const imageSrc = imageMap[item.name];
+            const mediaHTML = (imageSrc && imageSrc.trim() !== "")
+                ? `<img src="images/${imageSrc}" alt="${item.name}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px;">`
+                : `<div class="img-placeholder" style="display:none;margin-bottom: 15px;"></div>`;
+            
+            card.innerHTML = `
+                ${mediaHTML}
+                <h3>${item.name}</h3>
+                <p>${itemDesc}</p>
+                
+                <!-- REFINED QUANTITY CONTROLLER WITH TYPABLE INPUT FIELD -->
+                <div class="quantity-controller" style="display: flex; align-items: center; justify-content: center; margin-top: 15px; gap: 8px;" onclick="event.stopPropagation();">
+                    <button type="button" class="qty-btn minus" style="padding: 5px 14px; background: #e0e0e0; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1.1rem;">-</button>
+                    
+                    <input type="number" class="qty-input" min="0" max="999" value="${currentQty}" 
+                           style="width: 60px; text-align: center; font-weight: bold; font-size: 1rem; padding: 4px; border: 1px solid #ccc; border-radius: 4px; -moz-appearance: textfield;" />
+                    
+                    <button type="button" class="qty-btn plus" style="padding: 5px 14px; background: #ffcc00; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1.1rem;">+</button>
+                </div>
+            `;
+
+            const inputField = card.querySelector(".qty-input");
+
+            // Entire Card Click turns item from 0 to 1 field state cleanly
+            card.addEventListener("click", () => {
+                if ((orderSelections[item.name] || 0) === 0) {
+                    updateDirectQuantity(item.name, 1, inputField);
+                }
+            });
+
+            // Minus Button Event Click Handler
+            card.querySelector(".minus").addEventListener("click", () => {
+                let current = orderSelections[item.name] || 0;
+                updateDirectQuantity(item.name, Math.max(0, current - 1), inputField);
+            });
+
+            // Plus Button Event Click Handler
+            card.querySelector(".plus").addEventListener("click", () => {
+                let current = orderSelections[item.name] || 0;
+                updateDirectQuantity(item.name, current + 1, inputField);
+            });
+
+            // Direct Type Input Field Event Listener
+            inputField.addEventListener("input", (e) => {
+                let val = parseInt(e.target.value, 10);
+                if (isNaN(val) || val <= 0) val = 0;
+                updateDirectQuantity(item.name, val, inputField);
+            });
+
+            // Cleans up value field display on completely exiting focus if empty
+            inputField.addEventListener("blur", (e) => {
+                if (e.target.value === "") e.target.value = 0;
+            });
+
+            gridTarget.appendChild(card);
+        });
+    }
+
+    // Direct Sync Quantity Assignment Engine
+    function updateDirectQuantity(itemName, targetedAmount, inputElement) {
+        if (targetedAmount <= 0) {
+            delete orderSelections[itemName];
+            inputElement.value = 0;
+        } else {
+            orderSelections[itemName] = targetedAmount;
+            inputElement.value = targetedAmount;
+        }
+        
+        syncOrderToTextarea();
+    }
+
+    // Sync state layout straight down to Form Note input area dynamically
+    function syncOrderToTextarea() {
+        const notesArea = document.getElementById("menu-preferences");
+        const orderArea = document.getElementById("order-summary");
+        const summaryLines = [];
+
+        for (const [item, qty] of Object.entries(orderSelections)) {
+            summaryLines.push(`• ${qty}x ${item}`);
+        }
+
+        if (orderArea) {
+            orderArea.value = summaryLines.length > 0 ? summaryLines.join("\n") : "";
+        }
+
+        // Leave `menu-preferences` as the freeform special-requests box (do not auto-fill it)
+    }
+
+    function switchMenuTab(element, categoryKey) {
+        document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+        element.classList.add("active");
+        loadMenuModule(categoryKey);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        loadMenuModule("apps");
+    });
+
+    // Handle seamless backend intake submission (With Contact Validation Setup)
+    document.getElementById("cateringIntake").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const submitBtn = this.querySelector("button[type='submit']");
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = "SENDING REQUEST...";
+        submitBtn.disabled = true;
+
+        const formData = {
+            clientName: document.getElementById("client-name").value,
+            clientPhone: document.getElementById("client-phone").value,
+            clientEmail: document.getElementById("client-email").value,
+            setup: document.getElementById("event-profile").value,
+            guests: document.getElementById("guest-volume").value,
+            date: document.getElementById("target-date").value,
+            location: document.getElementById("location-space").value,
+            notes: document.getElementById("menu-preferences").value
+        };
+
+        fetch('https://formspree.io/f/mpqgpgyr', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                submitBtn.innerText = "✓ REQUEST SUBMITTED!";
+                submitBtn.style.backgroundColor = "#28a745";
+                // Show a confirmation modal with a snapshot of the submitted data
+                showSubmissionModal(formData);
+            } else {
+                throw new Error('Network error');
+            }
+        })
+        .catch(error => {
+            console.error("Error sending lead:", error);
+            submitBtn.innerText = "ERROR. TRY AGAIN.";
+            submitBtn.disabled = false;
+        });
+    });
+</script>
+
+<!-- Fixed footer CTA linking to the Chef Portfolio gallery -->
+<style>
+    /* Footer CTA styling and overlap-hide helper */
+    .footer-portfolio{position:fixed;left:0;right:0;bottom:16px;display:flex;justify-content:center;pointer-events:none;z-index:220;transition:opacity .28s ease,transform .28s ease}
+    .footer-portfolio a{pointer-events:auto;box-shadow:0 8px 20px rgba(0,0,0,0.25)}
+    .footer-portfolio.hidden-overlap{opacity:0;transform:translateY(8px);pointer-events:none}
+
+    /* Submission modal styles */
+    .modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:9999}
+    .modal{width:min(760px,96%);background:var(--text-light);color:var(--text-dark);border-radius:12px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,0.4);position:relative}
+    .modal h3{margin:0 0 6px 0;font-size:1.4rem}
+    .modal .muted{opacity:0.8;margin:0 0 12px 0}
+    .modal-body{background:#f8f6f4;padding:12px;border-radius:8px;max-height:360px;overflow:auto;color:#222}
+    .modal pre{white-space:pre-wrap;margin:0;font-family:inherit}
+    .modal-close{position:absolute;right:18px;top:12px;background:transparent;border:none;font-size:22px;cursor:pointer}
+    .modal-overlay[hidden]{display:none}
+</style>
+<footer id="chef-portfolio-footer" class="footer-portfolio">
+    <a href="collage.html" target="_blank" rel="noopener noreferrer" class="btn btn-accent">Chef Portfolio</a>
+</footer>
+
+<!-- Submission confirmation modal -->
+<div id="submission-modal" class="modal-overlay" hidden>
+    <div class="modal">
+        <button class="modal-close" aria-label="Close confirmation">×</button>
+        <h3>Request Submitted</h3>
+        <p class="muted">Thanks — we've received your intake request. Here's what you sent:</p>
+        <div class="modal-body" id="submission-snapshot"></div>
+        <div style="text-align:right;margin-top:12px;">
+            <button id="submission-done" class="btn btn-brand">Done</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal control: render a snapshot of the submitted data and show modal
+    function formatSubmissionSnapshot(data){
+        const lines = [];
+        lines.push(`<strong>Name:</strong> ${data.clientName || '-'}<br>`);
+        lines.push(`<strong>Phone:</strong> ${data.clientPhone || '-'}<br>`);
+        lines.push(`<strong>Email:</strong> ${data.clientEmail || '-'}<br>`);
+        lines.push(`<strong>Service Style:</strong> ${data.setup || '-'}<br>`);
+        lines.push(`<strong>Guests:</strong> ${data.guests || '-'}<br>`);
+        lines.push(`<strong>Date:</strong> ${data.date || '-'}<br>`);
+        lines.push(`<strong>Location:</strong> ${data.location || '-'}<br>`);
+        if (document.getElementById('order-summary')){
+            const ordered = document.getElementById('order-summary').value.trim();
+            lines.push(`<strong>Ordered Items:</strong><br>${ordered ? '<pre>'+ordered+'</pre>' : '<em>None</em>'}`);
+        }
+        if (data.notes){
+            lines.push(`<strong>Special Requests:</strong><br><pre>${data.notes}</pre>`);
+        }
+        return lines.join('\n');
+    }
+
+    function showSubmissionModal(data){
+        const modal = document.getElementById('submission-modal');
+        const snap = document.getElementById('submission-snapshot');
+        if (!modal || !snap) return;
+        snap.innerHTML = formatSubmissionSnapshot(data);
+        modal.removeAttribute('hidden');
+        // trap focus briefly
+        const close = modal.querySelector('.modal-close');
+        if (close) close.focus();
+    }
+
+    function hideSubmissionModal(){
+        const modal = document.getElementById('submission-modal');
+        if (!modal) return;
+        modal.setAttribute('hidden','');
+        // reset form, clear selections, restore button
+        const form = document.getElementById('cateringIntake');
+        if (form) form.reset();
+        for (const k in orderSelections) delete orderSelections[k];
+        syncOrderToTextarea();
+        const submitBtn = document.querySelector('#cateringIntake button[type="submit"]');
+        if (submitBtn){ submitBtn.innerText = 'Submit Intake Request & Verify Date'; submitBtn.style.backgroundColor=''; submitBtn.disabled=false; }
+        loadMenuModule('apps');
+    }
+
+    // wire modal buttons
+    document.addEventListener('click', function(e){
+        if (e.target && (e.target.id === 'submission-done' || e.target.classList.contains('modal-close'))){
+            hideSubmissionModal();
+        }
+    });
+
+    // Hide the Chef Portfolio footer button while the Catering Menu (#menus) section is visible
+    (function(){
+        const footer = document.getElementById('chef-portfolio-footer');
+        const menus = document.getElementById('menus');
+        if (!footer || !menus) return;
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) footer.classList.add('hidden-overlap');
+                else footer.classList.remove('hidden-overlap');
+            });
+        }, { root: null, threshold: 0.12 });
+
+        observer.observe(menus);
+    })();
+</script>
+
+</body>
+</html>
