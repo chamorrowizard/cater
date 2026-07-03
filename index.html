@@ -495,6 +495,7 @@
     <button class="tab-btn active" onclick="switchMenuTab(this, 'apps')">Appetizers</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'rolls')">Egg Rolls</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'mexican')">Mexican</button>
+            <button class="tab-btn" onclick="switchMenuTab(this, 'italian')">Italian</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'sandos')">Sandos</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'burgers')">Grill-N-Burgers</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'fries')">Chill-N-Fries</button>
@@ -615,6 +616,48 @@
             { name: "Aztec Fries", type: "Appetizer" },
             { name: "Pizza Fries", type: "Appetizer" },
             { name: "Steak Fries", type: "Appetizer" }
+        ],
+        italian: [
+            // --- REFRESHING APPETIZERS ---
+            { name: "Gourmet Italian Appetizers Selection", type: "Italian", desc: "A premium selection of bites: Caprese skewers, salami Mozzarella skewers, antipasto skewers, garlic shrimp skewers, prosciutto-wrapped melon, Italian pinwheels, and classic tomato-basil bruschetta." },
+            { name: "Warm Italian Appetizers Selection", type: "Italian", desc: "Savory hot starters featuring stuffed mushrooms, house Italian meatballs, crisp arancini, golden Mozzarella sticks, marinated artichokes, warm provolone dip, and Spanish artichoke dip." },
+
+            // --- THE PASTA BAR EXPERIENCE ---
+            { name: "PASTA BAR Experience", type: "Italian", desc: "Build-your-own premium interactive pasta layout. Includes your choice of Pasta (Penne, Fettuccine, Rigatoni, Cheese Tortellini, Gnocchi, or assorted Cheese, Meat, Veggie, or Seafood Ravioli) tossed in our signature house-made sauces." },
+            { name: "Signature House Sauces", type: "Italian", desc: "Crafted fresh daily: Marinara, Alfredo, Creamy Vodka, Basil Pesto, robust Bolognese, Garlic Butter, Lemon Butter, Creamy Limone, or rich Creamy Mushroom." },
+            { name: "Premium Pasta Proteins & Fixtures", type: "Italian", desc: "Top your pasta with Chicken Parmesan, Eggplant Parmesan, grilled chicken, savory Italian sausage, classic meatballs, sautéed shrimp, flaked salmon, or roasted market veggies. Accompanied by fresh parmesan, crushed red pepper, parsley, lemon wedges, and artisan olive oil & balsamic vinegar." },
+            { name: "Classic Roman Specialities", type: "Italian", desc: "Traditional favorites prepared to order: authentic Cacio e Pepe, rich Pasta Carbonara, or bold Pasta Puttanesca." },
+
+            // --- MAIN ENTRÉES ---
+            { name: "Chicken or Eggplant Parmesan Platter", type: "Italian", desc: "Crispy breaded chicken breast or tender eggplant slices layered with house marinara and melted mozzarella, baked to golden perfection." },
+            { name: "Chicken Marsala", type: "Italian", desc: "Tender chicken breasts pan-sear and simmered in a rich, deeply savory Marsala wine reduction loaded with earthy sautéed mushrooms." },
+            { name: "Chicken Piccata", type: "Italian", desc: "Pan-fried chicken cutlets served in a bright, velvety white wine, lemon juice, and briny caper butter sauce." },
+            { name: "Beef Braciole", type: "Italian", desc: "Thin slices of premium beef rolled with an aromatic filling of herbs, garlic, and cheese, slow-braised in a rich tomato reduction." },
+            { name: "Classic Baked Shells & Ziti", type: "Italian", desc: "Comforting oven-baked favorites: jumbo shells stuffed with seasoned ricotta or tender ziti pasta tossed with meat sauce and loaded with bubbling cheese." },
+            { name: "Italian Sausage, Peppers & Onions", type: "Italian", desc: "Sweet and spicy grilled Italian sausage links tossed with blistered bell peppers and sweet caramelized onions." },
+            { name: "Herb Roasted Salmon", type: "Italian", desc: "Premium Atlantic salmon fillets roasted with extra virgin olive oil, fresh garlic, and an aromatic blend of garden-fresh Italian herbs." },
+            { name: "Artisanal Lasagna", type: "Italian", desc: "Layers of fresh pasta sheet, rich cheeses, and your choice of a hearty Beef & Cheese or garden-fresh Vegetable & Cheese filling." },
+
+            // --- CURATED RISOTTO & POTATO SIDES ---
+            { name: "Premium Risotto & Grain Sides", type: "Italian", desc: "Rich and creamy selections: Parmesan Risotto, earthy Mushroom Risotto, bright Lemon Herb Risotto, delicate Parmesan Couscous, or fragrant Italian Herb Rice." },
+            { name: "Artisanal Potato Sides", type: "Italian", desc: "Perfectly seasoned cut options: Roasted Rosemary Potatoes, Parmesan Roasted Potatoes, Garlic Mashed Potatoes, crisp seasoned Potato Wedges, or Lemon & Herb Baby Potatoes." },
+
+            // --- FRESH VEGGIE SIDES ---
+            { name: "Garlic Parmesan Green Beans & Greens", type: "Italian", desc: "Fresh, vibrant vegetable choices: Garlic Parmesan Green Beans, Broccolini with garlic and fresh lemon, sautéed spinach with garlic, or garlic-sautéed mushrooms." },
+            { name: "Roasted Asparagus Tiers", type: "Italian", desc: "Tender market asparagus prepared classic fire-roasted or elegantly wrapped in crisp, savory prosciutto." },
+            { name: "Roasted Squash & Brussels Sprouts", type: "Italian", desc: "Robust roasted medleys: roasted zucchini, squash & sweet peppers, Brussels sprouts with garlic and crisp bacon, or caramelized Brussels sprouts with a sweet balsamic glaze." },
+
+            // --- CATERING SALADS & DRESSINGS ---
+            { name: "Signature Catering Salads", type: "Italian", desc: "Fresh, crisp favorites: classic Italian Chopped Salad, traditional Caesar, fresh Caprese salad, Mixed Garden salad, or a peppery Lemon Arugula salad with shaved parmesan and shaved fennel." },
+            { name: "Gourmet Deli & Specialty Salads", type: "Italian", desc: "Hearty, crowd-pleasing layers: loaded Antipasto salad, cold Pasta salad, Tortellini salad, Basil Pesto salad, or a Mediterranean Orzo salad featuring fresh spinach and crumbled feta." },
+            { name: "Artisanal Fruit & Nut Salads", type: "Italian", desc: "Sweet and savory medleys: Cucumber Tomato salad, Broad Bean salad with shaved parmesan, Strawberry Spinach, refreshing Mix Berry salad, Sweet Citrus Fennel, Pear Walnut & Gorgonzola salad, or crisp Apple Pecan salad." },
+            { name: "House-Made Dressing Flight", type: "Italian", desc: "Served with our signature dressings: Italian Vinaigrette, Creamy Caesar, Balsamic Vinaigrette, Lemon Herb Vinaigrette, Basil Pesto dressing, Red Wine Vinaigrette, and a rich Garlic Parmesan dressing." },
+
+            // --- SWEET FINISHES ---
+            { name: "Dolci Dessert Tray", type: "Italian", desc: "An elegant sweet assortment featuring traditional espresso-soaked Tiramisu, delicate mini cheesecakes, bright Italian Lemon Cake, crunchy almond biscotti, and chocolate-covered strawberries." },
+
+            // --- BEVERAGES ---
+            { name: "Italian Beverage Selection", type: "Italian", desc: "Refreshing sips: House-steeped Rosemary Lemonade, Iced Tea (sweet or unsweetened), crisp sparkling fruit waters, and an assortment of flavored Italian sodas." }
         ],
         rolls: [
             { name: "Steamed Veggie Roll", type: "Asian Fusion Roll" },
@@ -930,6 +973,32 @@
                 "Authentic Mexican Flan": "",
                 "Fresh Fruit Cups": "",
                 "Concha Tray": "",
+                // --- ITALIAN MENU ENTRIES ---
+                "Gourmet Italian Appetizers Selection": "",
+                "Warm Italian Appetizers Selection": "",
+                "PASTA BAR Experience": "",
+                "Signature House Sauces": "",
+                "Premium Pasta Proteins & Fixtures": "",
+                "Classic Roman Specialities": "",
+                "Chicken or Eggplant Parmesan Platter": "",
+                "Chicken Marsala": "",
+                "Chicken Piccata": "",
+                "Beef Braciole": "",
+                "Classic Baked Shells & Ziti": "",
+                "Italian Sausage, Peppers & Onions": "",
+                "Herb Roasted Salmon": "",
+                "Artisanal Lasagna": "",
+                "Premium Risotto & Grain Sides": "",
+                "Artisanal Potato Sides": "",
+                "Garlic Parmesan Green Beans & Greens": "",
+                "Roasted Asparagus Tiers": "",
+                "Roasted Squash & Brussels Sprouts": "",
+                "Signature Catering Salads": "",
+                "Gourmet Deli & Specialty Salads": "",
+                "Artisanal Fruit & Nut Salads": "",
+                "House-Made Dressing Flight": "",
+                "Dolci Dessert Tray": "",
+                "Italian Beverage Selection": "",
 
                 /* Sweets */
                 "Peach Cobbler Roll": "",
