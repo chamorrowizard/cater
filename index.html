@@ -495,6 +495,7 @@
     <button class="tab-btn active" onclick="switchMenuTab(this, 'apps')">Appetizers</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'rolls')">Egg Rolls</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'mexican')">Mexican</button>
+    <button class="tab-btn" onclick="switchMenuTab(this, 'asian')">Asian Cuisine</button>
             <button class="tab-btn" onclick="switchMenuTab(this, 'italian')">Italian</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'sandos')">Sandos</button>
     <button class="tab-btn" onclick="switchMenuTab(this, 'burgers')">Grill-N-Burgers</button>
@@ -617,6 +618,39 @@
             { name: "Pizza Fries", type: "Appetizer" },
             { name: "Steak Fries", type: "Appetizer" }
         ],
+
+        asian: [
+            // --- REFRESHING & CRISP APPETIZERS ---
+            { name: "Crisp & Chilled Asian Appetizers", type: "Asian", desc: "Fresh, vibrant starters: Summer rolls, summer rolls with shrimp & pork, lettuce wraps, spicy cucumber salad, Asian coleslaw, seaweed salad, and kimchi." },
+            { name: "Hot & Crispy Asian Appetizers", type: "Asian", desc: "Golden-crisped bites: Spring rolls, egg rolls, crab rangoons, potstickers, fried cauliflower, soup dumplings, steamed buns, gyoza, coconut shrimp, karaage (Japanese fried chicken), fried crispy wontons (shrimp or cream cheese), and tempura (shrimp, mushrooms, or vegetables)." },
+            { name: "Asian Skewers & Edamame Selection", type: "Asian", desc: "Savory small bites: Coconut curry skewers, Yakitori skewers (chicken or beef), BBQ skewers, shrimp skewers, Korean pork skewers, tsukune (Japanese meatballs), spicy tofu, and edamame (garlic, spicy, or plain)." },
+
+            // --- MAIN ENTRÉES ---
+            { name: "Classic Wok Entrées", type: "Asian", desc: "High-heat wocked favorites: Orange chicken, General Tso's chicken, sesame chicken, Mongolian beef, beef & broccoli, Kung Pao chicken, sweet and sour pork, cashew chicken, and crispy beef." },
+            { name: "Pan-Asian & Regional Favorites", type: "Asian", desc: "Flavors from around the continent: Teriyaki (chicken, beef, shrimp, or salmon), Korean Bulgogi, Kalua pork, Thai basil chicken (beef or vegetables), red or green curry (chicken or vegetables), chicken katsu, Hawaiian or Chinese style garlic chicken, honey walnut shrimp, crispy pork belly, Hawaiian BBQ (chicken, steak, short ribs), and broccoli & mushroom stir-fry." },
+
+            // --- NOODLES & RICE ---
+            { name: "Artisanal Fried & Steamed Rice", type: "Asian", desc: "Choose your grain: Garlic fried rice, Pineapple fried rice, or custom fried rice with your choice of protein (Chicken, Beef, Pork Belly, Shrimp, or Vegetables). Served alongside steamed jasmine rice, sticky rice, coconut rice, or brown rice." },
+            { name: "Signature Wok Noodles", type: "Asian", desc: "Hand-tossed noodle favorites: Chow mein, lo mein, Pad Thai, Singapore noodles, Yakisoba, Hong Kong noodles, Zhajiang noodles, garlic sesame noodles, spicy chili oil noodles, and ho fun noodles." },
+
+            // --- GOURMET SIDES ---
+            { name: "Wok Vegetables & Greens", type: "Asian", desc: "Freshly seared greens: Stir-fry mixed vegetables, garlic green beans, bok choy, stir-fry cabbage, sugar snap peas, snow peas, garlic mushrooms, stir-fry zucchini, eggplant with garlic sauce, roasted vegetables, sautéed spinach, braised potatoes, honey soy carrots, garlic asparagus, roasted cauliflower, and crispy chili green beans." },
+            { name: "Hawaiian & Pacific Rim Sides", type: "Asian", desc: "Island classics: Hawaiian macaroni salad, Hawaiian coleslaw, grilled pineapple, soft Hawaiian rolls, scallion pancakes, sesame noodle salad, and tofu salad with ginger dressing." },
+            { name: "Artisanal Salads & Pickles", type: "Asian", desc: "Tangy pickled side notes: Cucumber kimchi, pickled radish, Japanese potato salad, Korean potato salad, and curry potato salad." },
+
+            // --- HOUSE SOUPS ---
+            { name: "Comforting Soups & Noodle Bowls", type: "Asian", desc: "Slow-simmered house broths: Egg drop soup, hot & sour soup, wonton soup, pork noodle soup, chicken noodle soup, miso soup, artisan ramen, Thai coconut soup, corn and chicken soup, udon soup, soba noodle soup, and classic Pho." },
+
+            // --- HOUSE SAUCES & FIXTURES ---
+            { name: "Signature Dipping Sauces", type: "Asian", desc: "Crafted in-house: Sweet chili, yum yum, teriyaki, orange, Tso's, garlic soy, spicy mayo, peanut sauce, and gochujang." },
+
+            // --- SWEET FINISHES ---
+            { name: "Asian Dessert Assortment", type: "Asian", desc: "Sweet ends: Mango sticky rice, mochi ice cream, almond cookies, fortune cookies, fried bananas, green tea cheesecake, and coconut pudding." },
+
+            // --- SPECIALTY BEVERAGES ---
+            { name: "House-Brewed Asian Drinks", type: "Asian", desc: "Refreshing beverages: Thai iced tea and coffee (hot or iced), jasmine tea (hot or iced), green tea (hot or iced), lychee lemonade, mango lemonade, and rich Vietnamese iced coffee." }
+        ],
+
         italian: [
             // --- REFRESHING APPETIZERS ---
             { name: "Gourmet Italian Appetizers Selection", type: "Italian", desc: "A premium selection of bites: Caprese skewers, salami Mozzarella skewers, antipasto skewers, garlic shrimp skewers, prosciutto-wrapped melon, Italian pinwheels, and classic tomato-basil bruschetta." },
@@ -999,6 +1033,22 @@
                 "House-Made Dressing Flight": "",
                 "Dolci Dessert Tray": "",
                 "Italian Beverage Selection": "",
+
+                // --- ASIAN MENU ENTRIES ---
+            "Crisp & Chilled Asian Appetizers": "",
+            "Hot & Crispy Asian Appetizers": "",
+            "Asian Skewers & Edamame Selection": "",
+            "Classic Wok Entrées": "",
+            "Pan-Asian & Regional Favorites": "",
+            "Artisanal Fried & Steamed Rice": "",
+            "Signature Wok Noodles": "",
+            "Wok Vegetables & Greens": "",
+            "Hawaiian & Pacific Rim Sides": "",
+            "Artisanal Salads & Pickles": "",
+            "Comforting Soups & Noodle Bowls": "",
+            "Signature Dipping Sauces": "",
+            "Asian Dessert Assortment": "",
+            "House-Brewed Asian Drinks": "",
 
                 /* Sweets */
                 "Peach Cobbler Roll": "",
